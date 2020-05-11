@@ -38,6 +38,8 @@ void Player::update(float d)
 			//	モジュールを使用したアクション処理
 			ActModule()(*this, itr.second);
 
+			//_animMap[nowAnimName(itr.second.nowAnim)].
+
 			//	キャラクターの交代
 			if (oldID != itr.second.charaID)
 			{
@@ -69,30 +71,7 @@ void Player::update(float d)
 			if (itr.second.nowAnim != itr.second.anim)
 			{
 				//	次のアニメーションに現在のキー情報を渡す準備
-				char* nextKeyName = "idle";
-				switch (itr.second.nowAnim)
-				{
-				case IDLE:
-					nextKeyName = "idle";
-					break;
-				case RUN:
-					nextKeyName = "run";
-					break;
-				case ATK:
-					nextKeyName = "atk";
-					break;
-				case DAMAGE:
-					nextKeyName = "damage";
-					break;
-				case DIE:
-					nextKeyName = "die";
-					break;
-				case STATE_MAX:
-					break;
-				default:
-					break;
-				}
-				auto &nextKey = _charaList[nextKeyName];
+				auto &nextKey = _charaList[nowAnimName(itr.second.nowAnim)];
 
 				//	キーの初期化
 				for (auto itrKey : UseKey())

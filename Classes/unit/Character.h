@@ -51,6 +51,8 @@ protected:
 
 	cocos2d::Vec2 oldTouchPos;
 
+	char *nowAnimName(AnimState animName);
+
 	AnimMap _animMap;
 
 };

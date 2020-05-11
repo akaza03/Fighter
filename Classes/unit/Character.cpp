@@ -98,3 +98,32 @@ void Character::InitActData()
 
 	lpAnimMng.AnimRun(this, _charaList["idle"].nowAnim, _charaList["idle"].cType, _animMap);
 }
+
+char * Character::nowAnimName(AnimState animName)
+{
+	char* nextKeyName = "idle";
+	switch (animName)
+	{
+	case IDLE:
+		nextKeyName = "idle";
+		break;
+	case RUN:
+		nextKeyName = "run";
+		break;
+	case ATK:
+		nextKeyName = "atk";
+		break;
+	case DAMAGE:
+		nextKeyName = "damage";
+		break;
+	case DIE:
+		nextKeyName = "die";
+		break;
+	case STATE_MAX:
+		break;
+	default:
+		break;
+	}
+
+	return nextKeyName;
+}

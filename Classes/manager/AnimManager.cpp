@@ -22,49 +22,49 @@ void AnimManager::AnimationInit()
 	auto pass = RES_ID("p0unit");
 	_animMap["p0_idle"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 0), 3, 0.3f, true);
 	_animMap["p0_run"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(2, 1), 2, 0.3f, true);
-	_animMap["p0_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 5, 0.3f, true);
+	_animMap["p0_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 2, 0.3f, false);
 	_animMap["p0_damage"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 4), 3, 0.3f, true);
 	_animMap["p0_die"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(6, 5), 3, 0.3f, true);
 
 	pass = RES_ID("p1unit");
 	_animMap["p1_idle"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 0), 3, 0.3f, true);
 	_animMap["p1_run"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(2, 1), 2, 0.3f, true);
-	_animMap["p1_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 5, 0.3f, true);
+	_animMap["p1_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 5, 0.3f, false);
 	_animMap["p1_damage"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 4), 3, 0.3f, true);
 	_animMap["p1_die"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(6, 5), 3, 0.3f, true);
 
 	pass = RES_ID("p2unit");
 	_animMap["p2_idle"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 0), 3, 0.3f, true);
 	_animMap["p2_run"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(2, 1), 2, 0.3f, true);
-	_animMap["p2_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 5, 0.3f, true);
+	_animMap["p2_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 5, 0.3f, false);
 	_animMap["p2_damage"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 4), 3, 0.3f, true);
 	_animMap["p2_die"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(6, 5), 3, 0.3f, true);
 
 	pass = RES_ID("e0unit");
 	_animMap["e0_idle"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 0), 3, 0.3f, true);
 	_animMap["e0_run"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(2, 1), 2, 0.3f, true);
-	_animMap["e0_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 5, 0.3f, true);
+	_animMap["e0_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 5, 0.3f, false);
 	_animMap["e0_damage"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 4), 3, 0.3f, true);
 	_animMap["e0_die"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(6, 5), 3, 0.3f, true);
 
 	pass = RES_ID("e1unit");
 	_animMap["e1_idle"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 0), 3, 0.3f, true);
 	_animMap["e1_run"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(2, 1), 2, 0.3f, true);
-	_animMap["e1_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 5, 0.3f, true);
+	_animMap["e1_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 5, 0.3f, false);
 	_animMap["e1_damage"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 4), 3, 0.3f, true);
 	_animMap["e1_die"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(6, 5), 3, 0.3f, true);
 
 	pass = RES_ID("e2unit");
 	_animMap["e2_idle"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 0), 3, 0.3f, true);
 	_animMap["e2_run"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(2, 1), 2, 0.3f, true);
-	_animMap["e2_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 5, 0.3f, true);
+	_animMap["e2_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 5, 0.3f, false);
 	_animMap["e2_damage"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 4), 3, 0.3f, true);
 	_animMap["e2_die"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(6, 5), 3, 0.3f, true);
 
 	pass = RES_ID("e3unit");
 	_animMap["e3_idle"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 0), 3, 0.3f, true);
 	_animMap["e3_run"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(2, 1), 2, 0.3f, true);
-	_animMap["e3_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 1, 0.3f, true);
+	_animMap["e3_atk"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(1, 3), 1, 0.3f, false);
 	_animMap["e3_damage"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(0, 4), 3, 0.3f, true);
 	_animMap["e3_die"] = AnimationCreate(pass, cocos2d::Vec2(9, 6), cocos2d::Vec2(6, 5), 3, 0.3f, true);
 }
@@ -90,6 +90,7 @@ cocos2d::Animation * AnimManager::AnimationCreate(std::string imagePass, cocos2d
 		startID.x++;
 	}
 	_animation->setDelayPerUnit(frame);
+
 	_animation->setRestoreOriginalFrame(true);
 
 	_animation->retain();
@@ -105,9 +106,25 @@ void AnimManager::AnimRun(cocos2d::Sprite * sprite, AnimState anim, CharaType ty
 
 	if (action != nullptr)
 	{
+		if (animName == "atk")
+		{
+			action->setTag(10);
+		}
 		sprite->stopAllActions();
 		sprite->runAction(charaAnim[animName]);
 	}
+
+	//// コールバック
+	//auto remove = cocos2d::CallFunc::create([sprite]() {
+	//	sprite->removeFromParent();
+	//});
+
+	//// アクションとコールバックをシーケンス
+	//auto seq = cocos2d::Sequence::create(action, remove, nullptr);
+
+	//// アクションの実行
+	//sprite->runAction(seq);
+
 	AnimCountPlus(charaAnim);
 }
 
@@ -130,7 +147,7 @@ bool AnimManager::SetAnim(CharaType type, int id, AnimMap &anim)
 	{
 		anim["idle"] = cocos2d::RepeatForever::create(cocos2d::Animate::create(_animMap[charaID + "_idle"]));
 		anim["run"] = cocos2d::RepeatForever::create(cocos2d::Animate::create(_animMap[charaID + "_run"]));
-		anim["atk"] = cocos2d::RepeatForever::create(cocos2d::Animate::create(_animMap[charaID + "_atk"]));
+		anim["atk"] = cocos2d::Animate::create(_animMap[charaID + "_atk"]);
 		anim["damage"] = cocos2d::RepeatForever::create(cocos2d::Animate::create(_animMap[charaID + "_damage"]));
 		anim["die"] = cocos2d::RepeatForever::create(cocos2d::Animate::create(_animMap[charaID + "_die"]));
 		return true;

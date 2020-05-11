@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{e915e759-3c72-47be-b233-c3a9c1e0fb43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="map">
+      <UniqueIdentifier>{c5571882-dff5-456f-a12f-145cc31a09c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit">
+      <UniqueIdentifier>{08b796ac-653e-4d69-9fe3-c6c32de401b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input">
+      <UniqueIdentifier>{2ffd2ccf-8654-405a-91d3-6534eb30f1b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="manager">
+      <UniqueIdentifier>{c6536d13-e61b-452c-b9d9-3f6ff81b3819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="module">
+      <UniqueIdentifier>{71d063e1-0c48-4a8e-bb54-d6970f8c0272}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\scene\GameMain.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\map\MapMaker.cpp">
+      <Filter>map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\unit\Character.cpp">
+      <Filter>unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\unit\Enemy.cpp">
+      <Filter>unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\unit\Player.cpp">
+      <Filter>unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\input\OprtKey.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\input\OprtState.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\input\OprtTouch.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\input\UseKey.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\manager\AnimManager.cpp">
+      <Filter>manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\manager\ResourceManager.cpp">
+      <Filter>manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\module\AnimUpdate.cpp">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\module\DamageCheck.cpp">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\module\Move.cpp">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\module\OldKeyUpdate.cpp">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\module\SetPos.cpp">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\module\ActModule.cpp">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\scene\TitleScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\module\Attack.cpp">
+      <Filter>module</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scene\GameMain.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\map\MapMaker.h">
+      <Filter>map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\unit\Character.h">
+      <Filter>unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\unit\charaStruct.h">
+      <Filter>unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\unit\Enemy.h">
+      <Filter>unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\unit\Player.h">
+      <Filter>unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\input\OprtKey.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\input\OprtState.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\input\OprtTouch.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\input\UseKey.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\manager\AnimManager.h">
+      <Filter>manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\manager\ResourceManager.h">
+      <Filter>manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\module\AnimUpdate.h">
+      <Filter>module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\module\DamageCheck.h">
+      <Filter>module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\module\Move.h">
+      <Filter>module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\module\OldKeyUpdate.h">
+      <Filter>module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\module\SetPos.h">
+      <Filter>module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\module\ActSet.h">
+      <Filter>module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\module\ActModule.h">
+      <Filter>module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scene\TitleScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\module\Attack.h">
+      <Filter>module</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

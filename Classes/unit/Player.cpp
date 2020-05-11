@@ -38,8 +38,6 @@ void Player::update(float d)
 			//	モジュールを使用したアクション処理
 			ActModule()(*this, itr.second);
 
-			//_animMap[nowAnimName(itr.second.nowAnim)].
-
 			//	キャラクターの交代
 			if (oldID != itr.second.charaID)
 			{

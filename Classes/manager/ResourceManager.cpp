@@ -38,8 +38,6 @@ void ResourceManager::LoadInit()
 	SetID("credit", "image/UI/credit.png");
 	//	ƒ†ƒjƒbƒg‰æ‘œ
 	SetID("p0unit", "image/player/00-unit.png");
-	SetID("p1unit", "image/player/01-unit.png");
-	SetID("p2unit", "image/player/02-unit.png");
 	SetID("e0unit", "image/enemy/00-unit.png");
 	SetID("e1unit", "image/enemy/01-unit.png");
 	SetID("e2unit", "image/enemy/02-unit.png");

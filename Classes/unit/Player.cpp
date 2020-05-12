@@ -30,6 +30,17 @@ void Player::update(float d)
 				std::get<0>(itr.second.key[UseKey::K_SPACE]) = true;
 			}
 
+			//	タッチ座標の取得
+			if (_oprtState->GetTouchPoint() != oldTouchPos)
+			{
+				itr.second.touchPos = _oprtState->GetTouchPoint();
+				oldTouchPos = itr.second.touchPos;
+			}
+			else
+			{
+				itr.second.touchPos = cocos2d::Vec2(-10, -10);
+			}
+
 			unitUpdate(itr.second);
 		}
 	}

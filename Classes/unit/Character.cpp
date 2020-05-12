@@ -21,12 +21,14 @@ bool Character::SetInit(int id, cocos2d::Vec2 pos, int hp, float speed, cocos2d:
 	_actData.MaxHP = _actData.HP;
 	_actData.charaID = id;
 	_actData.speed = speed;
+	_actData.touchPos = cocos2d::Vec2(-10, -10);
 
 	//	アニメーションのセット
 	if (!lpAnimMng.SetAnim(_actData.cType, id, _animMap))
 	{
 		return false;
 	}
+
 	InitActData();
 
 	auto sprite = Sprite::create();
@@ -61,7 +63,7 @@ int Character::GetDamageCnt()
 void Character::InitActData()
 {
 	//	キャラクターの情報の追加
-	//oldTouchPos = _actData.touchPos;
+	oldTouchPos = _actData.touchPos;
 
 	_actData.key[UseKey::K_LEFT] = std::make_tuple(false, false, true);
 	_actData.key[UseKey::K_RIGHT] = std::make_tuple(false, false, true);
@@ -70,11 +72,6 @@ void Character::InitActData()
 	_actData.key[UseKey::K_SPACE] = std::make_tuple(false, false, true);
 	_actData.key[UseKey::K_A] = std::make_tuple(false, false, true);
 	_actData.key[UseKey::K_S] = std::make_tuple(false, false, true);
-
-	//_actData.checkPoint[DIR::LEFT] = false;
-	//_actData.checkPoint[DIR::RIGHT] = false;
-	//_actData.checkPoint[DIR::UP] = false;
-	//_actData.checkPoint[DIR::DOWN] = false;
 
 	_actData.anim = AnimState::IDLE;
 	_charaList.emplace(std::make_pair("idle", _actData));
@@ -180,6 +177,7 @@ void Character::unitUpdate(ActData & act)
 		nextKey.dir = act.dir;
 		nextKey.dirInver = act.dirInver;
 		nextKey.charaID = act.charaID;
+		nextKey.touchPos = act.touchPos;
 
 		lpAnimMng.AnimRun(this, act.nowAnim, act.cType, _animMap);
 	}

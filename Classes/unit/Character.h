@@ -23,6 +23,7 @@ struct ActData
 	float speed = 0;							//	移動速度
 	float distance = 0;
 	bool atkFlag = false;						//	攻撃中かどうか
+	cocos2d::Vec2 touchPos;						//	タッチ座標
 	int damageCnt = 0;							//	ダメージを受けた時の硬直時間
 	bool dirInver = false;						//	方向転換する場合はtrue
 	DIR dir = DIR::RIGHT;						//	現在の向き

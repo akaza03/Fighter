@@ -33,10 +33,6 @@ cocos2d::EventListener * OprtTouch::oprtInit()
 		StartSP->setScale(2);
 		nowScene->addChild(StartSP,0,"touchIcon");
 
-		auto moveSP = cocos2d::Sprite::create("CloseNormal.png");
-		moveSP->setPosition(_startTouchPos);
-		nowScene->addChild(moveSP, 0, "moveIcon");
-
 		//lpEffectManager.SetEffect((RES_ID("changeEff").c_str()), "UILayer", false, _startTouchPos, 20, true);
 
 		return true;
@@ -47,9 +43,6 @@ cocos2d::EventListener * OprtTouch::oprtInit()
 	{
 		firstTouchFlag = false;
 		checkKey(touch->getLocation());
-		auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
-		nowScene->getChildByName("moveIcon")->setPosition(touch->getLocation());
-
 		return true;
 	};
 
@@ -58,7 +51,7 @@ cocos2d::EventListener * OprtTouch::oprtInit()
 		firstTouchFlag = false;
 		auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
 		nowScene->removeChildByName("touchIcon");
-		nowScene->removeChildByName("moveIcon");
+
 		for (auto itrKey : UseKey())
 		{
 			_oprtKeyList[itrKey] = false;

@@ -65,6 +65,7 @@ list(APPEND GAME_SOURCE
      Classes/module/AnimUpdate.cpp
      Classes/module/Attack.cpp
      Classes/module/DamageCheck.cpp
+     Classes/module/DirCheck.cpp
      Classes/module/Move.cpp
      Classes/module/OldKeyUpdate.cpp
      Classes/module/SetPos.cpp
@@ -88,6 +89,7 @@ list(APPEND GAME_HEADER
      Classes/module/AnimUpdate.h
      Classes/module/Attack.h
      Classes/module/DamageCheck.h
+     Classes/module/DirCheck.h
      Classes/module/Move.h
      Classes/module/OldKeyUpdate.h
      Classes/module/SetPos.h

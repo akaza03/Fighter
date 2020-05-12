@@ -3,28 +3,59 @@
 
 bool Attack::operator()(cocos2d::Sprite & sp, ActData & act)
 {
-	act.atkFlag = true;
+	//	‰æ–Ê‰¡ƒTƒCƒY
+	auto scSizeX = cocos2d::Director::getInstance()->getOpenGLView()->getFrameSize().width;
 
-	if (sp.getActionByTag(10))
+	act.atkFlag = true;
+	//	Android”Å
+	if ((CC_TARGET_PLATFORM != CC_PLATFORM_WIN32) && (CC_TARGET_PLATFORM != CC_PLATFORM_MAC) && (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX))
 	{
-	}
-	else if (std::get<0>(act.key[UseKey::K_LEFT]) && !std::get<1>(act.key[UseKey::K_LEFT]))
-	{
-		if (act.dir == DIR::RIGHT)
+		if (sp.getActionByTag(10))
 		{
-			act.dirInver = true;
+		}
+		else if (act.touchPos.x >= 0 && act.touchPos.x < scSizeX / 2)
+		{
+			if (act.dir == DIR::RIGHT)
+			{
+				act.dirInver = true;
+			}
+		}
+		else if (act.touchPos.x >= scSizeX / 2 && act.touchPos.x <= scSizeX)
+		{
+			if (act.dir == DIR::LEFT)
+			{
+				act.dirInver = true;
+			}
+		}
+		else
+		{
+			act.atkFlag = false;
 		}
 	}
-	else if (std::get<0>(act.key[UseKey::K_RIGHT]) && !std::get<1>(act.key[UseKey::K_RIGHT]))
-	{
-		if (act.dir == DIR::LEFT)
-		{
-			act.dirInver = true;
-		}
-	}
+	//	PC”Å
 	else
 	{
-		act.atkFlag = false;
+		if (sp.getActionByTag(10))
+		{
+		}
+		else if (std::get<0>(act.key[UseKey::K_LEFT]) && !std::get<1>(act.key[UseKey::K_LEFT]))
+		{
+			if (act.dir == DIR::RIGHT)
+			{
+				act.dirInver = true;
+			}
+		}
+		else if (std::get<0>(act.key[UseKey::K_RIGHT]) && !std::get<1>(act.key[UseKey::K_RIGHT]))
+		{
+			if (act.dir == DIR::LEFT)
+			{
+				act.dirInver = true;
+			}
+		}
+		else
+		{
+			act.atkFlag = false;
+		}
 	}
 	return false;
 }

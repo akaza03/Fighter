@@ -93,6 +93,9 @@
     <ClCompile Include="..\Classes\module\Attack.cpp">
       <Filter>module</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\module\DirCheck.cpp">
+      <Filter>module</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -162,6 +165,9 @@
       <Filter>scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\module\Attack.h">
+      <Filter>module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\module\DirCheck.h">
       <Filter>module</Filter>
     </ClInclude>
   </ItemGroup>

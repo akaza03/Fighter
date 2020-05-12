@@ -8,8 +8,7 @@ bool AnimUpdate::operator()(cocos2d::Sprite & sp, ActData & act)
 	{
 		anim = AnimState::DAMAGE;
 	}
-	else if ((!sp.getActionByTag(10) && std::get<0>(act.key[UseKey::K_SPACE]) && !std::get<1>(act.key[UseKey::K_SPACE]))
-		 || (sp.getActionByTag(10)))
+	else if (act.atkFlag)
 	{
 		anim = AnimState::ATK;
 	}

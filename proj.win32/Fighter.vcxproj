@@ -160,6 +160,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\module\AnimUpdate.cpp" />
     <ClCompile Include="..\Classes\module\Attack.cpp" />
     <ClCompile Include="..\Classes\module\DamageCheck.cpp" />
+    <ClCompile Include="..\Classes\module\DirCheck.cpp" />
     <ClCompile Include="..\Classes\module\Move.cpp" />
     <ClCompile Include="..\Classes\module\OldKeyUpdate.cpp" />
     <ClCompile Include="..\Classes\module\SetPos.cpp" />
@@ -184,6 +185,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\module\AnimUpdate.h" />
     <ClInclude Include="..\Classes\module\Attack.h" />
     <ClInclude Include="..\Classes\module\DamageCheck.h" />
+    <ClInclude Include="..\Classes\module\DirCheck.h" />
     <ClInclude Include="..\Classes\module\Move.h" />
     <ClInclude Include="..\Classes\module\OldKeyUpdate.h" />
     <ClInclude Include="..\Classes\module\SetPos.h" />

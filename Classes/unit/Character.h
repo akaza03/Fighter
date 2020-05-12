@@ -22,8 +22,10 @@ struct ActData
 	int MaxHP = 1;								//	最大HP
 	float speed = 0;							//	移動速度
 	float distance = 0;
+	bool atkFlag = false;						//	攻撃中かどうか
 	int damageCnt = 0;							//	ダメージを受けた時の硬直時間
 	bool dirInver = false;						//	方向転換する場合はtrue
+	DIR dir = DIR::RIGHT;						//	現在の向き
 	keyList key;								//	どのキーを押したら処理するのか(List)
 	AnimState anim;								//	自身のアニメーション
 	AnimState nowAnim = AnimState::IDLE;		//	現在のアニメーション
@@ -54,5 +56,7 @@ protected:
 	char *nowAnimName(AnimState animName);
 
 	AnimMap _animMap;
+
+	void unitUpdate(ActData & act);							//	unit共通のupdate処理
 
 };

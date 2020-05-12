@@ -19,3 +19,10 @@ enum CharaType
 	CHARA_MAX
 };
 
+//	Œü‚«
+enum DIR
+{
+	LEFT,
+	RIGHT,
+	DIR_MAX
+};

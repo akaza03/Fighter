@@ -5,15 +5,15 @@ void ActModule::operator()(cocos2d::Sprite & sp, ActData & act)
 {
 	//	移動処理
 	Move()(sp, act);
+	//	攻撃
+	Attack()(sp, act);
 
 	//	アニメーションの更新
 	AnimUpdate()(sp, act);
-
+	//	向きの更新
+	DirCheck()(sp, act);
 	//	移動
 	SetPos()(sp, act);
-
-	//	攻撃
-	Attack()(sp, act);
 
 	//	キーの更新
 	OldKeyUpdate()(sp, act);

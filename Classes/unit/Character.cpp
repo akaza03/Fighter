@@ -127,3 +127,60 @@ char * Character::nowAnimName(AnimState animName)
 
 	return nextKeyName;
 }
+
+void Character::unitUpdate(ActData & act)
+{
+	//	現在のHP
+	auto oldHp = act.HP;
+	//	現在のcharaID
+	auto oldID = act.charaID;
+
+	//	モジュールを使用したアクション処理
+	ActModule()(*this, act);
+
+	if (act.HP <= 0)
+	{
+		act.HP = 0;
+		act.nowAnim = AnimState::DIE;
+	}
+
+	if (act.HP >= act.MaxHP)
+	{
+		act.HP = act.MaxHP;
+	}
+
+	if (act.HP <= 0 && oldHp != act.HP)
+	{
+		act.nowAnim = AnimState::DIE;
+		_actData.nowAnim = AnimState::DIE;
+	}
+
+	//	外部のチェック用
+	_actData.nowAnim = act.nowAnim;
+
+	if (act.nowAnim != act.anim)
+	{
+		//	次のアニメーションに現在のキー情報を渡す準備
+		auto &nextKey = _charaList[nowAnimName(act.nowAnim)];
+
+		//	キーの初期化
+		for (auto itrKey : UseKey())
+		{
+			//	次のアニメーションに現在のアニメーションのキー情報を渡す
+			std::get<0>(nextKey.key[itrKey]) = std::get<0>(act.key[itrKey]);
+			std::get<1>(nextKey.key[itrKey]) = std::get<1>(act.key[itrKey]);
+			//	今のアニメーションのキー情報を初期化
+			std::get<0>(act.key[itrKey]) = false;
+			std::get<1>(act.key[itrKey]) = false;
+		}
+		//	ステータスを渡す
+		nextKey.nowAnim = act.nowAnim;
+		nextKey.HP = act.HP;
+		nextKey.atkFlag = act.atkFlag;
+		nextKey.dir = act.dir;
+		nextKey.dirInver = act.dirInver;
+		nextKey.charaID = act.charaID;
+
+		lpAnimMng.AnimRun(this, act.nowAnim, act.cType, _animMap);
+	}
+}

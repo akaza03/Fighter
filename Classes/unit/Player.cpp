@@ -38,14 +38,6 @@ void Player::update(float d)
 			//	モジュールを使用したアクション処理
 			ActModule()(*this, itr.second);
 
-			//	キャラクターの交代
-			if (oldID != itr.second.charaID)
-			{
-				_animMap.clear();
-				lpAnimMng.SetAnim(itr.second.cType, itr.second.charaID, _animMap);
-				lpAnimMng.AnimRun(this, itr.second.nowAnim, itr.second.cType, _animMap);
-			}
-
 			if (itr.second.HP <= 0)
 			{
 				itr.second.HP = 0;

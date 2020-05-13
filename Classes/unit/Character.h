@@ -20,11 +20,12 @@ struct ActData
 {
 	int HP = 1;									//	体力
 	int MaxHP = 1;								//	最大HP
+	int damage = 0;								//	受けたダメージ
+	int damageCnt = 0;							//	ダメージを受けた時の硬直時間
 	float speed = 0;							//	移動速度
 	float distance = 0;
 	bool atkFlag = false;						//	攻撃中かどうか
 	cocos2d::Vec2 touchPos;						//	タッチ座標
-	int damageCnt = 0;							//	ダメージを受けた時の硬直時間
 	bool dirInver = false;						//	方向転換する場合はtrue
 	DIR dir = DIR::RIGHT;						//	現在の向き
 	keyList key;								//	どのキーを押したら処理するのか(List)
@@ -43,7 +44,13 @@ public:
 	virtual void update(float d) = 0;
 	bool SetInit(int id, cocos2d::Vec2 pos, int hp, float speed, cocos2d::Scene *scene);
 
-	int GetDamageCnt();																//	硬直時のカメラ制御用
+	AnimState GetAnim();									//	現在のアニメーションを取得
+
+	void SetDamage(int number);
+	int GetDamage();
+
+	void SetDamageCnt(int number);
+	int GetDamageCnt();
 
 private:
 	void InitActData();										//	ActDataの初期化

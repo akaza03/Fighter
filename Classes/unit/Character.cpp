@@ -34,7 +34,7 @@ bool Character::SetInit(int id, cocos2d::Vec2 pos, int hp, float speed, cocos2d:
 	auto sprite = Sprite::create();
 	setPosition(cocos2d::Vec2(pos.x + sprite->getContentSize().width / 2, pos.y));
 
-	if (_actData.cType == CharaType::PLAYER)
+	//if (_actData.cType == CharaType::PLAYER)
 	{
 		//	プラットフォームによって操作方法を変える
 		if ((CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX))
@@ -55,10 +55,6 @@ bool Character::SetInit(int id, cocos2d::Vec2 pos, int hp, float speed, cocos2d:
 	return true;
 }
 
-int Character::GetDamageCnt()
-{
-	return _actData.damageCnt;
-}
 
 void Character::InitActData()
 {
@@ -135,11 +131,13 @@ void Character::unitUpdate(ActData & act)
 	//	モジュールを使用したアクション処理
 	ActModule()(*this, act);
 
-	if (act.HP <= 0)
+	if (act.damageCnt > 0)
 	{
-		act.HP = 0;
-		act.nowAnim = AnimState::DIE;
+		_actData.damageCnt--;
 	}
+
+	act.HP -= _actData.damage;
+	_actData.damage = 0;
 
 	if (act.HP >= act.MaxHP)
 	{
@@ -148,12 +146,15 @@ void Character::unitUpdate(ActData & act)
 
 	if (act.HP <= 0 && oldHp != act.HP)
 	{
+		act.HP = 0;
 		act.nowAnim = AnimState::DIE;
 		_actData.nowAnim = AnimState::DIE;
 	}
 
 	//	外部のチェック用
 	_actData.nowAnim = act.nowAnim;
+
+	act.damageCnt = _actData.damageCnt;
 
 	if (act.nowAnim != act.anim)
 	{
@@ -178,7 +179,34 @@ void Character::unitUpdate(ActData & act)
 		nextKey.dirInver = act.dirInver;
 		nextKey.charaID = act.charaID;
 		nextKey.touchPos = act.touchPos;
+		nextKey.damageCnt = act.damageCnt;
 
 		lpAnimMng.AnimRun(this, act.nowAnim, act.cType, _animMap);
 	}
+}
+
+
+AnimState Character::GetAnim()
+{
+	return _actData.nowAnim;
+}
+
+int Character::GetDamage()
+{
+	return _actData.damage;
+}
+
+void Character::SetDamage(int number)
+{
+	_actData.damage = number;
+}
+
+int Character::GetDamageCnt()
+{
+	return _actData.damageCnt;
+}
+
+void Character::SetDamageCnt(int number)
+{
+	_actData.damageCnt = number;
 }

@@ -4,7 +4,7 @@
 bool AnimUpdate::operator()(cocos2d::Sprite & sp, ActData & act)
 {
 	auto anim = AnimState::IDLE;
-	if (act.damageCnt > 0)
+	if (act.damageCnt != 0)
 	{
 		anim = AnimState::DAMAGE;
 	}

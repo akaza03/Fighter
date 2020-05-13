@@ -3,6 +3,51 @@
 
 bool DamageCheck::operator()(cocos2d::Sprite & sp, ActData & act)
 {
+	if (act.anim == AnimState::ATK)
+	{
+		auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
+
+		//	キャラクターのタイプによって相手のレイヤーを変える
+		auto layer = nowScene->getChildByName("EMLayer");
+		if (act.cType == CharaType::ENEMY)
+		{
+			layer = nowScene->getChildByName("PLLayer");
+		}
+
+		auto cPos = sp.getPosition();
+		auto spSize = sp.getContentSize();
+		//	向いている方向に対して攻撃判定用BOX
+		auto rect = cocos2d::Rect(cPos.x, cPos.y - spSize.height / 2, spSize.width / 3, spSize.height / 2);
+		if (act.dir == DIR::LEFT)
+		{
+			rect = cocos2d::Rect(cPos.x - spSize.width / 3, cPos.y - spSize.height / 2, spSize.width / 3, spSize.height / 2);
+		}
+		
+		for (auto obj : layer->getChildren())
+		{
+			//	相手の判定用BOX
+			auto objBox = obj->boundingBox();
+
+			Character* enemy = (Character*)obj;
+
+			//	相手が既にダメージ状態なら処理しない
+			if (enemy->GetAnim() != AnimState::DAMAGE && enemy->GetDamage() == 0)
+			{
+				//	それぞれのBOXを判定
+				if (rect.intersectsRect(objBox))
+				{
+					enemy->SetDamage(50);
+					enemy->SetDamageCnt(50);
+					//if (act.damageCnt <= 0 && act.invTime <= 0 && act.anim != AnimState::THROW && act.anim != AnimState::DAMAGE)
+					//{
+					//	//	当たった場合はダメージ硬直
+					//	act.damageCnt = shot->GetStunTime();
+					//	DoDamage(sp, act);
+					//}
+				}
+			}
+		}
+	}
 	return false;
 }
 

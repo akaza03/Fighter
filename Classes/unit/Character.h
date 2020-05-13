@@ -60,6 +60,7 @@ protected:
 	std::map<const char *,ActData> _charaList;				//	キャラクターの情報用リスト
 
 	cocos2d::Vec2 oldTouchPos;
+	bool deathFlag = false;
 
 	char *nowAnimName(AnimState animName);
 

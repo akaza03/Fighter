@@ -16,6 +16,7 @@ bool DamageCheck::operator()(cocos2d::Sprite & sp, ActData & act)
 
 		auto cPos = sp.getPosition();
 		auto spSize = sp.getContentSize();
+
 		//	向いている方向に対して攻撃判定用BOX
 		auto rect = cocos2d::Rect(cPos.x, cPos.y - spSize.height / 2, spSize.width / 3, spSize.height / 2);
 		if (act.dir == DIR::LEFT)
@@ -37,6 +38,7 @@ bool DamageCheck::operator()(cocos2d::Sprite & sp, ActData & act)
 				//	それぞれのBOXを判定
 				if (rect.intersectsRect(objBox))
 				{
+					//	ダメージを与え、相手をのけぞらせる
 					enemy->SetDamage(50);
 					enemy->SetDamageCnt(50);
 				}
@@ -44,9 +46,5 @@ bool DamageCheck::operator()(cocos2d::Sprite & sp, ActData & act)
 		}
 	}
 	return false;
-}
-
-void DamageCheck::DoDamage(cocos2d::Sprite & sp, ActData & act)
-{
 }
 

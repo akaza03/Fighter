@@ -4,7 +4,7 @@
 bool Attack::operator()(cocos2d::Sprite & sp, ActData & act)
 {
 	//	‰æ–Ê‰¡ƒTƒCƒY
-	auto scSizeX = cocos2d::Director::getInstance()->getOpenGLView()->getFrameSize().width;
+	auto scSizeX = cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize().width;
 
 	act.atkFlag = true;
 	//	Android”Å

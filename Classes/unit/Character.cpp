@@ -144,11 +144,19 @@ void Character::unitUpdate(ActData & act)
 		act.HP = act.MaxHP;
 	}
 
-	if (act.HP <= 0 && oldHp != act.HP)
+	if (act.HP <= 0)
 	{
-		act.HP = 0;
-		act.nowAnim = AnimState::DIE;
-		_actData.nowAnim = AnimState::DIE;
+		if (act.anim == AnimState::DIE && act.damageCnt <= 0)
+		{
+			deathFlag = true;
+		}
+
+		if (oldHp != act.HP)
+		{
+			act.HP = 0;
+			act.nowAnim = AnimState::DIE;
+			_actData.nowAnim = AnimState::DIE;
+		}
 	}
 
 	//	外部のチェック用

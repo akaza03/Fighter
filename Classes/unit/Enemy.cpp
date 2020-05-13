@@ -34,9 +34,12 @@ void Enemy::update(float d)
 			unitUpdate(itr.second);
 		}
 	}
+
+	if (deathFlag)
+	{
+		auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
+		auto layer = nowScene->getChildByName("EMLayer");
+		layer->removeChild(this);
+	}
 }
 
-void Enemy::typeUpdate(ActData & act)
-{
-
-}

@@ -31,19 +31,14 @@ bool DamageCheck::operator()(cocos2d::Sprite & sp, ActData & act)
 			Character* enemy = (Character*)obj;
 
 			//	相手が既にダメージ状態なら処理しない
-			if (enemy->GetAnim() != AnimState::DAMAGE && enemy->GetDamage() == 0)
+			if (enemy->GetAnim() != AnimState::DAMAGE && enemy->GetAnim() != AnimState::DIE 
+				&& enemy->GetDamage() == 0 && enemy->GetDamageCnt() == 0)
 			{
 				//	それぞれのBOXを判定
 				if (rect.intersectsRect(objBox))
 				{
 					enemy->SetDamage(50);
 					enemy->SetDamageCnt(50);
-					//if (act.damageCnt <= 0 && act.invTime <= 0 && act.anim != AnimState::THROW && act.anim != AnimState::DAMAGE)
-					//{
-					//	//	当たった場合はダメージ硬直
-					//	act.damageCnt = shot->GetStunTime();
-					//	DoDamage(sp, act);
-					//}
 				}
 			}
 		}

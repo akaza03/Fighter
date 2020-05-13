@@ -171,6 +171,7 @@ void Character::unitUpdate(ActData & act)
 			std::get<0>(act.key[itrKey]) = false;
 			std::get<1>(act.key[itrKey]) = false;
 		}
+
 		//	ステータスを渡す
 		nextKey.nowAnim = act.nowAnim;
 		nextKey.HP = act.HP;

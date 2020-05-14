@@ -42,7 +42,7 @@ public:
 	Character();
 	virtual ~Character();
 	virtual void update(float d) = 0;
-	bool SetInit(int id, cocos2d::Vec2 pos, int hp, float speed, cocos2d::Scene *scene);
+	bool SetInit(int id, cocos2d::Vec2 pos, int hp, float speed, DIR dir, cocos2d::Scene *scene);
 
 	AnimState GetAnim();									//	現在のアニメーションを取得
 

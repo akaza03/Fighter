@@ -54,7 +54,6 @@ void MapMaker::SetChara(CharaType type, cocos2d::Layer * addLayer, cocos2d::Scen
 			//	playerLayerを読み込み、プレイヤーの座標を決定する
 			cocos2d::TMXLayer* layer = tiledMap->getLayer("player");
 			//	プレイヤーの座標
-			cocos2d::Vec2 Ppos = cocos2d::Vec2(0, 0);
 			for (int y = 0; y < layer->getLayerSize().height; y++)
 			{
 				for (int x = 0; x < layer->getLayerSize().width; x++)
@@ -68,7 +67,7 @@ void MapMaker::SetChara(CharaType type, cocos2d::Layer * addLayer, cocos2d::Scen
 				}
 			}
 
-			if (player->SetInit(0, Ppos, 100, 3,scene))
+			if (player->SetInit(0, Ppos, 100, 3, DIR::RIGHT, scene))
 			{
 				addLayer->addChild(player, 0, "player");
 			}
@@ -91,7 +90,15 @@ void MapMaker::SetChara(CharaType type, cocos2d::Layer * addLayer, cocos2d::Scen
 
 						//	敵のIDによってステータスを変更しながら登録
 						auto enemyID = transEnemyID(tileID);
-						if (Enemy->SetInit(enemyID, Epos, 100, 3,scene))
+
+						DIR dir = DIR::LEFT;
+
+						if (Epos.x < Ppos.x)
+						{
+							dir = DIR::RIGHT;
+						}
+
+						if (Enemy->SetInit(enemyID, Epos, 100, 3, dir, scene))
 						{
 							addLayer->addChild(Enemy, 0);
 						}

@@ -20,17 +20,6 @@ void Enemy::update(float d)
 	{
 		if (itr.second.nowAnim == itr.second.anim)
 		{
-			//	デバッグ用
-			//	キーのチェック
-			for (auto checkKey : _oprtState->GetKeyList())
-			{
-				//	そのキーが登録されていればキーを更新する
-				if (std::get<2>(itr.second.key[checkKey.first]))
-				{
-					std::get<0>(itr.second.key[checkKey.first]) = checkKey.second;
-				}
-			}
-
 			unitUpdate(itr.second);
 		}
 	}

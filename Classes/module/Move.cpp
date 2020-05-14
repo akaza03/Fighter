@@ -6,17 +6,15 @@ bool Move::operator()(cocos2d::Sprite & sp, ActData & act)
 	auto dis = 0;
 	if (act.cType == CharaType::ENEMY)
 	{
-		if (act.anim != AnimState::DAMAGE)
+		if (act.anim != AnimState::DAMAGE && act.anim != AnimState::DIE)
 		{
 			//	ç∂à⁄ìÆ
-			if (std::get<0>(act.key[UseKey::K_A])
-				&& std::get<2>(act.key[UseKey::K_A]))
+			if (act.dir == DIR::LEFT)
 			{
 				dis -= act.speed;
 			}
 			//	âEà⁄ìÆ
-			if (std::get<0>(act.key[UseKey::K_S])
-				&& std::get<2>(act.key[UseKey::K_S]))
+			if (act.dir == DIR::RIGHT)
 			{
 				dis += act.speed;
 			}

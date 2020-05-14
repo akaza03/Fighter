@@ -25,6 +25,8 @@ public:
 private:
 	int transEnemyID(int id);									//	マップIDをエネミーIDに変換する
 
+	cocos2d::Vec2 Ppos = cocos2d::Vec2(0, 0);
+
 	cocos2d::Size mapSize = cocos2d::Size(0,0);
 	cocos2d::TMXTiledMap* tiledMap;
 };

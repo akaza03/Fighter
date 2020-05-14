@@ -15,13 +15,19 @@ Character::~Character()
 	}
 }
 
-bool Character::SetInit(int id, cocos2d::Vec2 pos, int hp, float speed, cocos2d::Scene *scene)
+bool Character::SetInit(int id, cocos2d::Vec2 pos, int hp, float speed, DIR dir, cocos2d::Scene *scene)
 {
 	_actData.HP = hp;
 	_actData.MaxHP = _actData.HP;
 	_actData.charaID = id;
 	_actData.speed = speed;
 	_actData.touchPos = cocos2d::Vec2(-10, -10);
+
+	_actData.dir = dir;
+	if (dir == DIR::RIGHT)
+	{
+		setFlippedX(true);
+	}
 
 	//	アニメーションのセット
 	if (!lpAnimMng.SetAnim(_actData.cType, id, _animMap))
@@ -34,7 +40,7 @@ bool Character::SetInit(int id, cocos2d::Vec2 pos, int hp, float speed, cocos2d:
 	auto sprite = Sprite::create();
 	setPosition(cocos2d::Vec2(pos.x + sprite->getContentSize().width / 2, pos.y));
 
-	//if (_actData.cType == CharaType::PLAYER)
+	if (_actData.cType == CharaType::PLAYER)
 	{
 		//	プラットフォームによって操作方法を変える
 		if ((CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX))
@@ -49,8 +55,6 @@ bool Character::SetInit(int id, cocos2d::Vec2 pos, int hp, float speed, cocos2d:
 		//	操作イベントの作成
 		scene->getEventDispatcher()->addEventListenerWithSceneGraphPriority(_oprtState->oprtInit(), scene);
 	}
-
-	setFlippedX(true);
 
 	return true;
 }

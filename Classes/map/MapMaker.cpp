@@ -98,7 +98,7 @@ void MapMaker::SetChara(CharaType type, cocos2d::Layer * addLayer, cocos2d::Scen
 							dir = DIR::RIGHT;
 						}
 
-						if (Enemy->SetInit(enemyID, Epos, 100, 3, dir, scene))
+						if (Enemy->SetInit(enemyID, Epos, 100, 12, dir, scene))
 						{
 							addLayer->addChild(Enemy, 0);
 						}

@@ -47,9 +47,9 @@ void Player::update(float d)
 
 	if (deathFlag)
 	{
-		auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
-		auto layer = nowScene->getChildByName("PLLayer");
-		layer->removeChild(this);
+		//auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
+		//auto layer = nowScene->getChildByName("PLLayer");
+		//layer->removeChild(this);
 	}
 }
 

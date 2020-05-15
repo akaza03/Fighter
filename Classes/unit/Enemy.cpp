@@ -28,6 +28,13 @@ void Enemy::update(float d)
 	{
 		auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
 		auto layer = nowScene->getChildByName("EMLayer");
+
+		for (auto obj : layer->getChildren())
+		{
+			Character* enemy = (Character*)obj;
+			enemy->SetMoveFlag(true);
+		}
+
 		layer->removeChild(this);
 	}
 }

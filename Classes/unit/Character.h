@@ -23,8 +23,12 @@ struct ActData
 	int damage = 0;								//	受けたダメージ
 	int damageCnt = 0;							//	ダメージを受けた時の硬直時間
 	float speed = 0;							//	移動速度
-	float distance = 0;
+	float distance = 0;							//	移動する距離
+	float totalDis = 0;							//	合計移動距離
+	bool moveFlag = false;						//	敵の移動用フラグ
 	bool atkFlag = false;						//	攻撃中かどうか
+	bool atkHit = false;						//	
+	bool atkMiss = false;						//	攻撃が当たったかどうか
 	cocos2d::Vec2 touchPos;						//	タッチ座標
 	bool dirInver = false;						//	方向転換する場合はtrue
 	DIR dir = DIR::RIGHT;						//	現在の向き
@@ -46,11 +50,19 @@ public:
 
 	AnimState GetAnim();									//	現在のアニメーションを取得
 
+	//	ダメージのセットゲット
 	void SetDamage(int number);
 	int GetDamage();
 
+	//	ダメージ時の硬直時間のセットゲット
 	void SetDamageCnt(int number);
 	int GetDamageCnt();
+
+	//	敵用の移動フラグのセット
+	void SetMoveFlag(bool flag);
+
+	//	攻撃が当たったかどうかの確認
+	bool GetAtkMiss();
 
 private:
 	void InitActData();										//	ActDataの初期化

@@ -132,6 +132,8 @@ void Character::unitUpdate(ActData & act)
 	//	現在のcharaID
 	auto oldID = act.charaID;
 
+	act.moveFlag = _actData.moveFlag;
+
 	//	モジュールを使用したアクション処理
 	ActModule()(*this, act);
 
@@ -165,6 +167,8 @@ void Character::unitUpdate(ActData & act)
 
 	//	外部のチェック用
 	_actData.nowAnim = act.nowAnim;
+	_actData.moveFlag = act.moveFlag;
+	_actData.atkMiss = act.atkMiss;
 
 	act.damageCnt = _actData.damageCnt;
 
@@ -193,6 +197,11 @@ void Character::unitUpdate(ActData & act)
 		nextKey.charaID = act.charaID;
 		nextKey.touchPos = act.touchPos;
 		nextKey.damageCnt = act.damageCnt;
+		nextKey.moveFlag = act.moveFlag;
+		nextKey.distance = act.distance;
+		nextKey.totalDis = act.totalDis;
+		nextKey.atkHit = act.atkHit;
+		nextKey.atkMiss = act.atkMiss;
 
 		lpAnimMng.AnimRun(this, act.nowAnim, act.cType, _animMap);
 	}
@@ -222,4 +231,14 @@ int Character::GetDamageCnt()
 void Character::SetDamageCnt(int number)
 {
 	_actData.damageCnt = number;
+}
+
+void Character::SetMoveFlag(bool flag)
+{
+	_actData.moveFlag = flag;
+}
+
+bool Character::GetAtkMiss()
+{
+	return _actData.atkMiss;
 }

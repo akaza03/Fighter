@@ -5,7 +5,7 @@ void ActModule::operator()(cocos2d::Sprite & sp, ActData & act)
 {
 	//	ˆÚ“®ˆ—
 	Move()(sp, act);
-	if (act.cType == CharaType::PLAYER)
+	//if (act.cType == CharaType::PLAYER)
 	{
 		//	UŒ‚
 		Attack()(sp, act);

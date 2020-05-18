@@ -67,7 +67,7 @@ void MapMaker::SetChara(CharaType type, cocos2d::Layer * addLayer, cocos2d::Scen
 				}
 			}
 
-			if (player->SetInit(0, Ppos, 100, 3, DIR::RIGHT, scene))
+			if (player->SetInit(0, Ppos, 1000, 3, DIR::RIGHT, scene))
 			{
 				addLayer->addChild(player, 0, "player");
 			}
@@ -98,7 +98,7 @@ void MapMaker::SetChara(CharaType type, cocos2d::Layer * addLayer, cocos2d::Scen
 							dir = DIR::RIGHT;
 						}
 
-						if (Enemy->SetInit(enemyID, Epos, 100, 12, dir, scene))
+						if (Enemy->SetInit(enemyID, Epos, 50, 12, dir, scene))
 						{
 							addLayer->addChild(Enemy, 0);
 						}

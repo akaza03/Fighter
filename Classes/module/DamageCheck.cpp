@@ -31,18 +31,18 @@ bool DamageCheck::operator()(cocos2d::Sprite & sp, ActData & act)
 
 			Character* enemy = (Character*)obj;
 
-			//	相手が既にダメージ状態なら処理しない
-			if (enemy->GetAnim() != AnimState::DAMAGE && enemy->GetAnim() != AnimState::DIE 
-				&& enemy->GetDamage() == 0 && enemy->GetDamageCnt() == 0)
+			//	それぞれのBOXを判定
+			if (rect.intersectsRect(objBox))
 			{
-				//	それぞれのBOXを判定
-				if (rect.intersectsRect(objBox))
+				//	相手が既にダメージ状態なら処理しない
+				if (enemy->GetAnim() != AnimState::DAMAGE && enemy->GetAnim() != AnimState::DIE
+					&& enemy->GetDamage() == 0 && enemy->GetDamageCnt() == 0)
 				{
 					//	ダメージを与え、相手をのけぞらせる
 					enemy->SetDamage(50);
 					enemy->SetDamageCnt(10);
-					act.atkHit = true;
 				}
+				act.atkHit = true;
 			}
 		}
 

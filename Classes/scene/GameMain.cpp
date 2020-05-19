@@ -55,6 +55,8 @@ bool GameMain::init()
 	confScSize = cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
 	scSize = cocos2d::Director::getInstance()->getOpenGLView()->getFrameSize();
 
+	lpScoreMng.ResetScore();
+
 	BGLayer = Layer::create();
 	this->addChild(BGLayer, LayerNumber::BG, "BGLayer");
 	PLLayer = Layer::create();
@@ -70,14 +72,14 @@ bool GameMain::init()
 	BWLayer = Layer::create();
 	this->addChild(BWLayer, LayerNumber::BW, "BWLayer");
 
-	auto map = MapMaker::create();
-	map->SetMap("map.tmx", BGLayer, "stageMap");
+	lpMapMaker.SetMap("map.tmx", BGLayer, "stageMap");
 
 	//	プレイヤーの作成
-	map->SetChara(CharaType::PLAYER, PLLayer, this);
+	lpMapMaker.SetChara(CharaType::PLAYER, PLLayer, this);
 	//	敵の作成
-	map->SetChara(CharaType::ENEMY, EMLayer, this);
+	lpMapMaker.SetChara(CharaType::ENEMY, EMLayer, this);
 
+	lpScoreMng.SetNumber(UILayer);
 
 	//	カメラのセット
 	_camera = Camera::createOrthographic(confScSize.width, confScSize.height, 0, 1000);
@@ -99,7 +101,7 @@ bool GameMain::init()
 
 void GameMain::update(float d)
 {
-
+	lpScoreMng.update();
 }
 
 void GameMain::cameraUpdate()

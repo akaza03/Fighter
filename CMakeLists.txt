@@ -55,6 +55,7 @@ list(APPEND GAME_SOURCE
      Classes/input/UseKey.cpp
      Classes/manager/AnimManager.cpp
      Classes/manager/ResourceManager.cpp
+     Classes/manager/ScoreManager.cpp
      Classes/map/MapMaker.cpp
      Classes/scene/TitleScene.cpp
      Classes/scene/GameMain.cpp
@@ -69,6 +70,7 @@ list(APPEND GAME_SOURCE
      Classes/module/Move.cpp
      Classes/module/OldKeyUpdate.cpp
      Classes/module/SetPos.cpp
+     Classes/UIClass/Number.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -78,6 +80,7 @@ list(APPEND GAME_HEADER
      Classes/input/UseKey.h
      Classes/manager/AnimManager.h
      Classes/manager/ResourceManager.h
+     Classes/manager/ScoreManager.h
      Classes/map/MapMaker.h
      Classes/scene/TitleScene.h
      Classes/scene/GameMain.h
@@ -94,6 +97,7 @@ list(APPEND GAME_HEADER
      Classes/module/OldKeyUpdate.h
      Classes/module/SetPos.h
      Classes/module/ActSet.h
+     Classes/UIClass/Number.h
      )
 
 if(ANDROID)

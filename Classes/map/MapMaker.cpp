@@ -2,6 +2,8 @@
 #include "unit/Player.h"
 #include "unit/Enemy.h"
 
+MapMaker* MapMaker::s_Instance = nullptr;
+
 
 MapMaker::MapMaker()
 {
@@ -132,6 +134,31 @@ int MapMaker::GetTile(cocos2d::Vec2 pos, cocos2d::TMXLayer * layer)
 		return layer->getTileGIDAt(pos);
 	}
 	return 0;
+}
+
+void MapMaker::SetEnemy(int charaID, DIR dir)
+{
+	auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
+	auto layer = nowScene->getChildByName("EMLayer");
+
+	auto enemy = Enemy::create();
+	auto Epos = cocos2d::Vec2(tiledMap->getTileSize().width / 2,
+		6 * tiledMap->getTileSize().height - tiledMap->getTileSize().height / 2);
+
+	if (dir == DIR::LEFT)
+	{
+		Epos = cocos2d::Vec2(tiledMap->getMapSize().width * tiledMap->getTileSize().width - tiledMap->getTileSize().width / 2,
+			6 * tiledMap->getTileSize().height - tiledMap->getTileSize().height / 2);
+	}
+
+	if (enemy->SetInit(charaID, Epos, 50, 12, dir, nowScene))
+	{
+		layer->addChild(enemy, 0);
+		//	カメラのセット
+		enemy->setCameraMask(static_cast<int>(cocos2d::CameraFlag::USER1), true);
+		//	enemyのupdateを走らせる
+		enemy->scheduleUpdate();
+	}
 }
 
 cocos2d::Size MapMaker::GetMapSize()

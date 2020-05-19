@@ -52,14 +52,14 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
 
 private:
-	cocos2d::Layer * BGLayer;				//	バックグラウンド用レイヤー
-	cocos2d::Layer * PLLayer;				//	プレイヤー&攻撃用レイヤー
-	cocos2d::Layer * EMLayer;				//	エネミー&攻撃用レイヤー
+	cocos2d::Layer * BGLayer;			//	バックグラウンド用レイヤー
+	cocos2d::Layer * PLLayer;			//	プレイヤー&攻撃用レイヤー
+	cocos2d::Layer * EMLayer;			//	エネミー&攻撃用レイヤー
 	cocos2d::Layer * ATKLayer;
-	cocos2d::Layer * UILayer;				//	UI用レイヤー
-	cocos2d::Layer * BWLayer;				//	画面を暗くするレイヤー(ポーズ画面など)
-	cocos2d::Layer * FGLayer;				//	フロントグラウンド用レイヤー
-	cocos2d::Layer * DBLayer;				//	デバッグ用レイヤー
+	cocos2d::Layer * UILayer;			//	UI用レイヤー
+	cocos2d::Layer * BWLayer;			//	画面を暗くするレイヤー(ポーズ画面など)
+	cocos2d::Layer * FGLayer;			//	フロントグラウンド用レイヤー
+	cocos2d::Layer * DBLayer;			//	デバッグ用レイヤー
 
 	cocos2d::Camera* _camera;
 
@@ -70,8 +70,8 @@ private:
 	void startSchedule(float d);
 	void endSchedule(float d);
 
-	cocos2d::Size confScSize;				//	設定上の画面サイズ
-	cocos2d::Size scSize;					//	実際の画面サイズ
+	cocos2d::Size confScSize;			//	設定上の画面サイズ
+	cocos2d::Size scSize;				//	実際の画面サイズ
     
     // implement the "static create()" method manually
     CREATE_FUNC(GameMain);

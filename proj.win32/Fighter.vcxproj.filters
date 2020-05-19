@@ -28,6 +28,9 @@
     <Filter Include="module">
       <UniqueIdentifier>{71d063e1-0c48-4a8e-bb54-d6970f8c0272}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UIClass">
+      <UniqueIdentifier>{31503b55-b822-42f4-a13e-055b026db09d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -95,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\module\DirCheck.cpp">
       <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\manager\ScoreManager.cpp">
+      <Filter>manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UIClass\Number.cpp">
+      <Filter>UIClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +178,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\module\DirCheck.h">
       <Filter>module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\manager\ScoreManager.h">
+      <Filter>manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UIClass\Number.h">
+      <Filter>UIClass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

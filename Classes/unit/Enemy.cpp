@@ -1,5 +1,5 @@
+#include "map/MapMaker.h"
 #include "Enemy.h"
-
 
 
 Enemy::Enemy()
@@ -35,7 +35,22 @@ void Enemy::update(float d)
 			enemy->SetMoveFlag(true);
 		}
 
+		EnemyCreate();
+
+		lpScoreMng.PlusScore(1);
+
 		layer->removeChild(this);
+	}
+}
+
+void Enemy::EnemyCreate()
+{
+	for (auto &itr : _charaList)
+	{
+		if (itr.second.nowAnim == itr.second.anim)
+		{
+			lpMapMaker.SetEnemy(itr.second.charaID, itr.second.dir);
+		}
 	}
 }
 

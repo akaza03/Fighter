@@ -5,6 +5,7 @@
 #include "module/ActModule.h"
 #include "manager/ResourceManager.h"
 #include "manager/AnimManager.h"
+#include "manager/ScoreManager.h"
 #include "input/UseKey.h"
 #include "input/OprtState.h"
 

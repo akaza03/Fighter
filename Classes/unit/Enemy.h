@@ -10,6 +10,6 @@ public:
 	void update(float d);
 	CREATE_FUNC(Enemy);
 private:
-	void typeUpdate(ActData &act);					//	charaID‚²‚Æ‚Ìˆ—
+	void EnemyCreate();					// €–S‚É“G‚ğ‘‚â‚·
 };
 

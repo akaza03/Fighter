@@ -155,6 +155,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\input\UseKey.cpp" />
     <ClCompile Include="..\Classes\manager\AnimManager.cpp" />
     <ClCompile Include="..\Classes\manager\ResourceManager.cpp" />
+    <ClCompile Include="..\Classes\manager\ScoreManager.cpp" />
     <ClCompile Include="..\Classes\map\MapMaker.cpp" />
     <ClCompile Include="..\Classes\module\ActModule.cpp" />
     <ClCompile Include="..\Classes\module\AnimUpdate.cpp" />
@@ -166,6 +167,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\module\SetPos.cpp" />
     <ClCompile Include="..\Classes\scene\GameMain.cpp" />
     <ClCompile Include="..\Classes\scene\TitleScene.cpp" />
+    <ClCompile Include="..\Classes\UIClass\Number.cpp" />
     <ClCompile Include="..\Classes\unit\Character.cpp" />
     <ClCompile Include="..\Classes\unit\Enemy.cpp" />
     <ClCompile Include="..\Classes\unit\Player.cpp" />
@@ -179,6 +181,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\input\UseKey.h" />
     <ClInclude Include="..\Classes\manager\AnimManager.h" />
     <ClInclude Include="..\Classes\manager\ResourceManager.h" />
+    <ClInclude Include="..\Classes\manager\ScoreManager.h" />
     <ClInclude Include="..\Classes\map\MapMaker.h" />
     <ClInclude Include="..\Classes\module\ActModule.h" />
     <ClInclude Include="..\Classes\module\ActSet.h" />
@@ -191,6 +194,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\module\SetPos.h" />
     <ClInclude Include="..\Classes\scene\GameMain.h" />
     <ClInclude Include="..\Classes\scene\TitleScene.h" />
+    <ClInclude Include="..\Classes\UIClass\Number.h" />
     <ClInclude Include="..\Classes\unit\Character.h" />
     <ClInclude Include="..\Classes\unit\charaStruct.h" />
     <ClInclude Include="..\Classes\unit\Enemy.h" />

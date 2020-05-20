@@ -70,8 +70,6 @@ void Character::InitActData()
 	_actData.key[UseKey::K_UP] = std::make_tuple(false, false, true);
 	_actData.key[UseKey::K_DOWN] = std::make_tuple(false, false, true);
 	_actData.key[UseKey::K_SPACE] = std::make_tuple(false, false, true);
-	_actData.key[UseKey::K_A] = std::make_tuple(false, false, true);
-	_actData.key[UseKey::K_S] = std::make_tuple(false, false, true);
 
 	_actData.anim = AnimState::IDLE;
 	_charaList.emplace(std::make_pair("idle", _actData));
@@ -85,8 +83,6 @@ void Character::InitActData()
 	_actData.key[UseKey::K_UP] = std::make_tuple(false, false, false);
 	_actData.key[UseKey::K_DOWN] = std::make_tuple(false, false, false);
 	_actData.key[UseKey::K_SPACE] = std::make_tuple(false, false, false);
-	_actData.key[UseKey::K_A] = std::make_tuple(false, false, false);
-	_actData.key[UseKey::K_S] = std::make_tuple(false, false, false);
 
 	_actData.anim = AnimState::DAMAGE;
 	_charaList.emplace(std::make_pair("damage", _actData));

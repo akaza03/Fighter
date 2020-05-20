@@ -39,7 +39,7 @@ bool DamageCheck::operator()(cocos2d::Sprite & sp, ActData & act)
 					&& enemy->GetDamage() == 0 && enemy->GetDamageCnt() == 0)
 				{
 					//	ダメージを与え、相手をのけぞらせる
-					enemy->SetDamage(50);
+					enemy->SetDamage(1);
 					enemy->SetDamageCnt(10);
 				}
 				act.atkHit = true;

@@ -69,7 +69,7 @@ void MapMaker::SetChara(CharaType type, cocos2d::Layer * addLayer, cocos2d::Scen
 				}
 			}
 
-			if (player->SetInit(0, Ppos, 1000, 3, DIR::RIGHT, scene))
+			if (player->SetInit(0, Ppos, 5, 3, DIR::RIGHT, scene))
 			{
 				addLayer->addChild(player, 0, "player");
 			}
@@ -100,7 +100,20 @@ void MapMaker::SetChara(CharaType type, cocos2d::Layer * addLayer, cocos2d::Scen
 							dir = DIR::RIGHT;
 						}
 
-						if (Enemy->SetInit(enemyID, Epos, 50, 12, dir, scene))
+						auto hp = 1;
+						switch (enemyID)
+						{
+						case 0:
+							hp = 1;
+							break;
+						case 1:
+							hp = 3;
+							break;
+						default:
+							break;
+						}
+
+						if (Enemy->SetInit(enemyID, Epos, hp, 12, dir, scene))
 						{
 							addLayer->addChild(Enemy, 0);
 						}
@@ -151,7 +164,20 @@ void MapMaker::SetEnemy(int charaID, DIR dir)
 			6 * tiledMap->getTileSize().height - tiledMap->getTileSize().height / 2);
 	}
 
-	if (enemy->SetInit(charaID, Epos, 50, 12, dir, nowScene))
+	auto hp = 1;
+	switch (charaID)
+	{
+	case 0:
+		hp = 1;
+		break;
+	case 1:
+		hp = 3;
+		break;
+	default:
+		break;
+	}
+
+	if (enemy->SetInit(charaID, Epos, hp, 12, dir, nowScene))
 	{
 		layer->addChild(enemy, 0);
 		//	カメラのセット

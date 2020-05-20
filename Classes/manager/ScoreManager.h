@@ -17,11 +17,15 @@ public:
 	}
 	~ScoreManager();
 
+	void InitNumber();
+
 	void SetNumber(cocos2d::Layer* layer);
 
 	int GetScore();
+	void SetScore(int number);
+
 	void PlusScore(int number);
-	void ResetScore();
+	void ResetScore(cocos2d::Layer* layer);
 
 	void update();
 

@@ -37,8 +37,6 @@ void Enemy::update(float d)
 
 		EnemyCreate();
 
-		lpScoreMng.PlusScore(1);
-
 		layer->removeChild(this);
 	}
 }
@@ -50,6 +48,20 @@ void Enemy::EnemyCreate()
 		if (itr.second.nowAnim == itr.second.anim)
 		{
 			lpMapMaker.SetEnemy(itr.second.charaID, itr.second.dir);
+
+			auto point = 1;
+			switch (itr.second.charaID)
+			{
+			case 0:
+				point = 50;
+				break;
+			case 1:
+				point = 100;
+				break;
+			default:
+				break;
+			}
+			lpScoreMng.PlusScore(point);
 		}
 	}
 }

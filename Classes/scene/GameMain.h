@@ -26,7 +26,11 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "input/OprtState.h"
 #include "manager/ResourceManager.h"
+
+ //	システム用キー(now,old)
+using sysKey = std::map <UseKey, std::pair<bool, bool>>;
 
 enum LayerNumber
 {
@@ -63,12 +67,18 @@ private:
 
 	cocos2d::Camera* _camera;
 
+	OprtState *_oprtState;				//	システム用の操作制御
+	sysKey key;
+
 	void update(float d);
 
 	void cameraUpdate();
+	void keyUpdate();
+	void screenUpdate();
 
 	void startSchedule(float d);
-	void endSchedule(float d);
+	void endSchedule();
+	void pause(cocos2d::Layer layer);
 
 	cocos2d::Size confScSize;			//	設定上の画面サイズ
 	cocos2d::Size scSize;				//	実際の画面サイズ

@@ -26,6 +26,8 @@
 #include "TitleScene.h"
 #include "map/MapMaker.h"
 #include "unit/Player.h"
+#include "input/OprtKey.h"
+#include "input/OprtTouch.h"
 #include "SimpleAudioEngine.h"
 
 USING_NS_CC;
@@ -54,8 +56,8 @@ bool GameMain::init()
 
 	confScSize = cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
 	scSize = cocos2d::Director::getInstance()->getOpenGLView()->getFrameSize();
-
-	lpScoreMng.ResetScore();
+	lpScoreMng.InitNumber();
+	lpScoreMng.SetScore(0);
 
 	BGLayer = Layer::create();
 	this->addChild(BGLayer, LayerNumber::BG, "BGLayer");
@@ -94,6 +96,18 @@ bool GameMain::init()
 	ATKLayer->setCameraMask(static_cast<int>(CameraFlag::USER1), true);
 	FGLayer->setCameraMask(static_cast<int>(CameraFlag::USER1), true);
 
+	//	操作イベントの作成
+	//	プラットフォームによって操作方法を変える
+	if ((CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX))
+	{
+		_oprtState = new OprtKey();
+	}
+	else
+	{
+		_oprtState = new OprtTouch();
+	}
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(_oprtState->oprtInit(), this);
+
 	this->scheduleOnce(schedule_selector(GameMain::startSchedule), 2.1f);
 
     return true;
@@ -101,7 +115,20 @@ bool GameMain::init()
 
 void GameMain::update(float d)
 {
+	//	スコアの更新
 	lpScoreMng.update();
+	//	キーの更新
+	keyUpdate();
+	//	cameraの更新
+	cameraUpdate();
+	//	ゲームクリア判断
+	screenUpdate();
+
+	//	keyOldのUpdate
+	for (auto itrKey : UseKey())
+	{
+		key[itrKey].second = key[itrKey].first;
+	}
 }
 
 void GameMain::cameraUpdate()
@@ -137,6 +164,36 @@ void GameMain::cameraUpdate()
 	}
 }
 
+void GameMain::keyUpdate()
+{
+	for (auto checkKey : _oprtState->GetKeyList())
+	{
+		key[checkKey.first].first = checkKey.second;
+	}
+}
+
+void GameMain::screenUpdate()
+{
+	Character* player = (Character*)PLLayer->getChildByName("player");
+	//	ゲームクリアorゲームオーバー処理
+	if (player->GetAnim() == AnimState::DIE)
+	{
+		if (key[UseKey::K_ENTER].first && !key[UseKey::K_ENTER].second || _oprtState->firstTouch())
+		{
+			endSchedule();
+
+			auto fadeTime = 2.0f;
+			//lpAudioManager.ResetAudio();
+			//lpAudioManager.SetSound("click");
+			auto scene = TitleScene::createScene();
+
+			lpScoreMng.ResetScore(UILayer);
+			auto fade = TransitionFade::create(fadeTime, scene);
+			Director::getInstance()->replaceScene(fade);
+		}
+	}
+}
+
 void GameMain::startSchedule(float d)
 {
 	this->scheduleUpdate();
@@ -157,7 +214,7 @@ void GameMain::startSchedule(float d)
 	}
 }
 
-void GameMain::endSchedule(float d)
+void GameMain::endSchedule()
 {
 	this->unscheduleAllSelectors();
 
@@ -175,6 +232,11 @@ void GameMain::endSchedule(float d)
 	{
 		obj->unscheduleAllSelectors();
 	}
+}
+
+void GameMain::pause(cocos2d::Layer layer)
+{
+
 }
 
 void GameMain::menuCloseCallback(Ref* pSender)

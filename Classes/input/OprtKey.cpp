@@ -19,21 +19,11 @@ cocos2d::EventListener * OprtKey::oprtInit()
 	{
 		if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW)
 		{
-			//	¶ˆÚ“®
 			_oprtKeyList[UseKey::K_LEFT] = true;
 		}
 		else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
 		{
-			//	‰EˆÚ“®
 			_oprtKeyList[UseKey::K_RIGHT] = true;
-		}
-		else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW)
-		{
-			//if (chara->GetMovePos().y == 0)
-			{
-				//	ƒWƒƒƒ“ƒv
-				_oprtKeyList[UseKey::K_UP] = true;
-			}
 		}
 		else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW)
 		{
@@ -42,14 +32,6 @@ cocos2d::EventListener * OprtKey::oprtInit()
 		else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_SPACE)
 		{
 			_oprtKeyList[UseKey::K_SPACE] = true;
-		}
-		else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_A)
-		{
-			_oprtKeyList[UseKey::K_A] = true;
-		}
-		else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_S)
-		{
-			_oprtKeyList[UseKey::K_S] = true;
 		}
 		else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_ENTER)
 		{
@@ -79,14 +61,6 @@ cocos2d::EventListener * OprtKey::oprtInit()
 		else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_SPACE)
 		{
 			_oprtKeyList[UseKey::K_SPACE] = false;
-		}
-		else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_A)
-		{
-			_oprtKeyList[UseKey::K_A] = false;
-		}
-		else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_S)
-		{
-			_oprtKeyList[UseKey::K_S] = false;
 		}
 		else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_ENTER)
 		{

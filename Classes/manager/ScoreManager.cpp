@@ -4,16 +4,20 @@ ScoreManager* ScoreManager::s_Instance = nullptr;
 
 ScoreManager::ScoreManager()
 {
+}
+
+ScoreManager::~ScoreManager()
+{
+}
+
+void ScoreManager::InitNumber()
+{
 	auto confScSize = cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
 
 	number = Number::create();
 	number->setPosition(confScSize.width - 60, confScSize.height - 40);
 	number->setSpan(40);
 	number->setPrefix("number");
-}
-
-ScoreManager::~ScoreManager()
-{
 }
 
 void ScoreManager::SetNumber(cocos2d::Layer* layer)
@@ -26,14 +30,19 @@ int ScoreManager::GetScore()
 	return score;
 }
 
+void ScoreManager::SetScore(int number)
+{
+	score = number;
+}
+
 void ScoreManager::PlusScore(int number)
 {
 	score += number;
 }
 
-void ScoreManager::ResetScore()
+void ScoreManager::ResetScore(cocos2d::Layer* layer)
 {
-	score = 0;
+	//layer->removeChildByName("enemyCounter");
 }
 
 void ScoreManager::update()

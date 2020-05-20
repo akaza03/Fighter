@@ -76,7 +76,6 @@ void Number::CreateNumber(int num)
 	}
 }
 
-
 void Number::RemoveNumber(void)
 {
 	auto number = std::to_string(_num);

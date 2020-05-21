@@ -41,6 +41,11 @@ bool DamageCheck::operator()(cocos2d::Sprite & sp, ActData & act)
 					//	ダメージを与え、相手をのけぞらせる
 					enemy->SetDamage(1);
 					enemy->SetDamageCnt(10);
+					
+					if (act.cType == CharaType::ENEMY)
+					{
+						lpScoreMng.PlusScore(-200);
+					}
 				}
 				act.atkHit = true;
 			}

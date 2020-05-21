@@ -26,6 +26,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "UIClass/Number.h"
 #include "input/OprtState.h"
 #include "manager/ResourceManager.h"
 
@@ -57,9 +58,8 @@ public:
 
 private:
 	cocos2d::Layer * BGLayer;			//	バックグラウンド用レイヤー
-	cocos2d::Layer * PLLayer;			//	プレイヤー&攻撃用レイヤー
-	cocos2d::Layer * EMLayer;			//	エネミー&攻撃用レイヤー
-	cocos2d::Layer * ATKLayer;
+	cocos2d::Layer * PLLayer;			//	プレイヤー用レイヤー
+	cocos2d::Layer * EMLayer;			//	エネミー用レイヤー
 	cocos2d::Layer * UILayer;			//	UI用レイヤー
 	cocos2d::Layer * BWLayer;			//	画面を暗くするレイヤー(ポーズ画面など)
 	cocos2d::Layer * FGLayer;			//	フロントグラウンド用レイヤー
@@ -70,18 +70,29 @@ private:
 	OprtState *_oprtState;				//	システム用の操作制御
 	sysKey key;
 
+	Number* time;						//	時間用
+
 	void update(float d);
+
+	void SetUI();
 
 	void cameraUpdate();
 	void keyUpdate();
-	void screenUpdate();
+	void timeUpdate();
 
 	void startSchedule(float d);
 	void endSchedule();
-	void pause(cocos2d::Layer layer);
+
+	void screenUpdate();
+	void pause(cocos2d::Layer* layer);	//	ポーズ
+	void darkScreen();					//	ポーズ時の画面の暗転処理
 
 	cocos2d::Size confScSize;			//	設定上の画面サイズ
 	cocos2d::Size scSize;				//	実際の画面サイズ
+
+	float timeCount;
+	bool pauseFlag;
+	bool gameEndFlag;
     
     // implement the "static create()" method manually
     CREATE_FUNC(GameMain);

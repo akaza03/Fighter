@@ -69,7 +69,7 @@ void MapMaker::SetChara(CharaType type, cocos2d::Layer * addLayer, cocos2d::Scen
 				}
 			}
 
-			if (player->SetInit(0, Ppos, 5, 3, DIR::RIGHT, scene))
+			if (player->SetInit(0, Ppos, 1000, 3, DIR::RIGHT, scene))
 			{
 				addLayer->addChild(player, 0, "player");
 			}
@@ -113,7 +113,7 @@ void MapMaker::SetChara(CharaType type, cocos2d::Layer * addLayer, cocos2d::Scen
 							break;
 						}
 
-						if (Enemy->SetInit(enemyID, Epos, hp, 12, dir, scene))
+						if (Enemy->SetInit(enemyID, Epos, hp, 16, dir, scene))
 						{
 							addLayer->addChild(Enemy, 0);
 						}
@@ -156,12 +156,12 @@ void MapMaker::SetEnemy(int charaID, DIR dir)
 
 	auto enemy = Enemy::create();
 	auto Epos = cocos2d::Vec2(tiledMap->getTileSize().width / 2,
-		6 * tiledMap->getTileSize().height - tiledMap->getTileSize().height / 2);
+		5 * tiledMap->getTileSize().height - tiledMap->getTileSize().height / 2);
 
 	if (dir == DIR::LEFT)
 	{
 		Epos = cocos2d::Vec2(tiledMap->getMapSize().width * tiledMap->getTileSize().width - tiledMap->getTileSize().width / 2,
-			6 * tiledMap->getTileSize().height - tiledMap->getTileSize().height / 2);
+			5 * tiledMap->getTileSize().height - tiledMap->getTileSize().height / 2);
 	}
 
 	auto hp = 1;
@@ -177,7 +177,7 @@ void MapMaker::SetEnemy(int charaID, DIR dir)
 		break;
 	}
 
-	if (enemy->SetInit(charaID, Epos, hp, 12, dir, nowScene))
+	if (enemy->SetInit(charaID, Epos, hp, 16, dir, nowScene))
 	{
 		layer->addChild(enemy, 0);
 		//	カメラのセット

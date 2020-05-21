@@ -58,6 +58,7 @@ bool GameMain::init()
 	scSize = cocos2d::Director::getInstance()->getOpenGLView()->getFrameSize();
 	lpScoreMng.InitNumber();
 	lpScoreMng.SetScore(0);
+	gameEndFlag = false;
 
 	BGLayer = Layer::create();
 	this->addChild(BGLayer, LayerNumber::BG, "BGLayer");
@@ -65,8 +66,6 @@ bool GameMain::init()
 	this->addChild(PLLayer, LayerNumber::PL, "PLLayer");
 	EMLayer = Layer::create();
 	this->addChild(EMLayer, LayerNumber::EM, "EMLayer");
-	ATKLayer = Layer::create();
-	this->addChild(ATKLayer, LayerNumber::AT, "ATKLayer");
 	FGLayer = Layer::create();
 	this->addChild(FGLayer, LayerNumber::FG, "FGLayer");
 	UILayer = Layer::create();
@@ -75,6 +74,8 @@ bool GameMain::init()
 	this->addChild(BWLayer, LayerNumber::BW, "BWLayer");
 
 	lpMapMaker.SetMap("map.tmx", BGLayer, "stageMap");
+
+	SetUI();
 
 	//	プレイヤーの作成
 	lpMapMaker.SetChara(CharaType::PLAYER, PLLayer, this);
@@ -93,7 +94,6 @@ bool GameMain::init()
 	BGLayer->setCameraMask(static_cast<int>(CameraFlag::USER1), true);
 	PLLayer->setCameraMask(static_cast<int>(CameraFlag::USER1), true);
 	EMLayer->setCameraMask(static_cast<int>(CameraFlag::USER1), true);
-	ATKLayer->setCameraMask(static_cast<int>(CameraFlag::USER1), true);
 	FGLayer->setCameraMask(static_cast<int>(CameraFlag::USER1), true);
 
 	//	操作イベントの作成
@@ -121,14 +121,35 @@ void GameMain::update(float d)
 	keyUpdate();
 	//	cameraの更新
 	cameraUpdate();
+	//	制限時間の更新
+	timeUpdate();
 	//	ゲームクリア判断
 	screenUpdate();
 
-	//	keyOldのUpdate
+	//	keyOldの更新
 	for (auto itrKey : UseKey())
 	{
 		key[itrKey].second = key[itrKey].first;
 	}
+}
+
+void GameMain::SetUI()
+{
+	//	ポーズ時用の黒い幕
+	auto fadeImage = Sprite::create();
+	fadeImage->setTextureRect(Rect(0, 0, scSize.width * 2, scSize.height * 2));
+	fadeImage->setPosition(0, 0);
+	fadeImage->setColor(Color3B(0, 0, 0));
+	fadeImage->setOpacity(0);
+	BWLayer->addChild(fadeImage, 0, "fade");
+
+	time = Number::create();
+	time->setPosition(confScSize.width / 2, confScSize.height - 40);
+	time->setSpan(40);
+	time->setPrefix("number");
+	UILayer->addChild(time, 1, "timeCounter");
+	timeCount = 61 * 10;
+	timeUpdate();
 }
 
 void GameMain::cameraUpdate()
@@ -172,25 +193,12 @@ void GameMain::keyUpdate()
 	}
 }
 
-void GameMain::screenUpdate()
+void GameMain::timeUpdate()
 {
-	Character* player = (Character*)PLLayer->getChildByName("player");
-	//	ゲームクリアorゲームオーバー処理
-	if (player->GetAnim() == AnimState::DIE)
+	if (timeCount > 0 && !pauseFlag)
 	{
-		if (key[UseKey::K_ENTER].first && !key[UseKey::K_ENTER].second || _oprtState->firstTouch())
-		{
-			endSchedule();
-
-			auto fadeTime = 2.0f;
-			//lpAudioManager.ResetAudio();
-			//lpAudioManager.SetSound("click");
-			auto scene = TitleScene::createScene();
-
-			lpScoreMng.ResetScore(UILayer);
-			auto fade = TransitionFade::create(fadeTime, scene);
-			Director::getInstance()->replaceScene(fade);
-		}
+		//timeCount--;
+		time->setNumber(timeCount / 10);
 	}
 }
 
@@ -234,9 +242,82 @@ void GameMain::endSchedule()
 	}
 }
 
-void GameMain::pause(cocos2d::Layer layer)
+void GameMain::screenUpdate()
 {
+	Character* player = (Character*)PLLayer->getChildByName("player");
+	//	ゲームクリアorゲームオーバー処理
+	if (player->GetAnim() == AnimState::DIE || timeCount / 10 <= 0)
+	{
+		if (!gameEndFlag)
+		{
+			pause(PLLayer);
+			pause(EMLayer);
+			pause(BGLayer);
+			pause(FGLayer);
+			darkScreen();
+			gameEndFlag = true;
+		}
 
+		if (key[UseKey::K_ENTER].first && !key[UseKey::K_ENTER].second || _oprtState->firstTouch())
+		{
+			endSchedule();
+
+			auto fadeTime = 2.0f;
+			//lpAudioManager.ResetAudio();
+			//lpAudioManager.SetSound("click");
+			auto scene = TitleScene::createScene();
+
+			lpScoreMng.ResetScore(UILayer);
+			auto fade = TransitionFade::create(fadeTime, scene);
+			Director::getInstance()->replaceScene(fade);
+		}
+	}
+	else
+	{
+		//	ポーズ画面
+		if (key[UseKey::K_ENTER].first && !key[UseKey::K_ENTER].second)
+		{
+			pause(PLLayer);
+			pause(EMLayer);
+			pause(BGLayer);
+			pause(FGLayer);
+			darkScreen();
+		}
+	}
+}
+
+void GameMain::pause(cocos2d::Layer* layer)
+{
+	auto scSize = cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
+
+	for (auto* childs : layer->getChildren())
+	{
+		//	ポーズ解除
+		if (pauseFlag)
+		{
+			childs->resumeSchedulerAndActions();
+		}
+		//	ポーズ開始
+		else
+		{
+			childs->pauseSchedulerAndActions();
+		}
+	}
+}
+
+void GameMain::darkScreen()
+{
+	if (pauseFlag)
+	{
+		BWLayer->removeChildByName("pauseText");
+		BWLayer->getChildByName("fade")->setOpacity(0);
+		pauseFlag = false;
+	}
+	else
+	{
+		BWLayer->getChildByName("fade")->setOpacity(120);
+		pauseFlag = true;
+	}
 }
 
 void GameMain::menuCloseCallback(Ref* pSender)

@@ -47,5 +47,9 @@ void ScoreManager::ResetScore(cocos2d::Layer* layer)
 
 void ScoreManager::update()
 {
+	if (score < 0)
+	{
+		score = 0;
+	}
 	number->setNumber(score);
 }

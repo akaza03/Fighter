@@ -21,7 +21,7 @@ bool Move::operator()(cocos2d::Sprite & sp, ActData & act)
 
 			act.totalDis += act.speed;
 
-			if (act.totalDis >= 48)
+			if (act.totalDis >= 64)
 			{
 				act.totalDis = 0;
 				act.moveFlag = false;

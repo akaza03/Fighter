@@ -31,6 +31,9 @@
     <Filter Include="UIClass">
       <UniqueIdentifier>{31503b55-b822-42f4-a13e-055b026db09d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CricketJni">
+      <UniqueIdentifier>{8803f929-c5ae-4179-9fd2-cdee71895968}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -104,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\UIClass\Number.cpp">
       <Filter>UIClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CricketJni\CricketJni.cpp">
+      <Filter>CricketJni</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UIClass\Number.h">
       <Filter>UIClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CricketJni\CricketJni.h">
+      <Filter>CricketJni</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

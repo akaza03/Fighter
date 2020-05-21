@@ -148,7 +148,7 @@ void GameMain::SetUI()
 	time->setSpan(40);
 	time->setPrefix("number");
 	UILayer->addChild(time, 1, "timeCounter");
-	timeCount = 61 * 10;
+	timeCount = 60 * 10;
 	timeUpdate();
 }
 
@@ -197,7 +197,16 @@ void GameMain::timeUpdate()
 {
 	if (timeCount > 0 && !pauseFlag)
 	{
-		//timeCount--;
+		for (auto obj : PLLayer->getChildren())
+		{
+			Character* pl = (Character*)obj;
+			if (pl->GetDamage() != 0)
+			{
+				timeCount -= 30;
+			}
+		}
+
+		timeCount--;
 		time->setNumber(timeCount / 10);
 	}
 }

@@ -49,6 +49,7 @@ endif()
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
+     Classes/CricketJni/CricketJni.cpp
      Classes/input/OprtState.cpp
      Classes/input/OprtKey.cpp
      Classes/input/OprtTouch.cpp
@@ -74,6 +75,7 @@ list(APPEND GAME_SOURCE
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
+     Classes/CricketJni/CricketJni.h
      Classes/input/OprtState.h
      Classes/input/OprtKey.h
      Classes/input/OprtTouch.h

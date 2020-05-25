@@ -6,6 +6,8 @@
 #include "manager/ResourceManager.h"
 #include "manager/AnimManager.h"
 #include "manager/ScoreManager.h"
+#include "manager/AudioManager.h"
+#include "manager/EffManager.h"
 #include "input/UseKey.h"
 #include "input/OprtState.h"
 

@@ -1,5 +1,5 @@
 #include "TitleScene.h"
-#include "Input/OprtTouch.h"
+#include "input/OprtTouch.h"
 #include "GameMain.h"
 
 //#pragma execution_character_set("utf-8")
@@ -48,7 +48,7 @@ bool TitleScene::init()
 		_oprtState = new OprtTouch();
 	}
 
-	//lpAudioManager.SetSound("titleBGM.cks");
+	lpAudioManager.SetSound("titleBGM.cks");
 
 	//	操作イベントの作成
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(_oprtState->oprtInit(), this);
@@ -71,7 +71,7 @@ void TitleScene::update(float d)
 		auto touchFlag = false;
 
 		//	Audioの更新
-		//lpAudioManager.update();
+		lpAudioManager.update();
 
 		for (auto checkKey : _oprtState->GetKeyList())
 		{
@@ -155,8 +155,8 @@ void TitleScene::update(float d)
 			//	ゲーム開始
 			if (gameButtonFlag)
 			{
-				//lpAudioManager.ResetAudio();
-				//lpAudioManager.SetSound("click");
+				lpAudioManager.ResetAudio();
+				lpAudioManager.SetSound("click");
 
 				auto scene = GameMain::createScene();
 
@@ -168,7 +168,7 @@ void TitleScene::update(float d)
 			}
 			else
 			{
-				//lpAudioManager.SetSound("click");
+				lpAudioManager.SetSound("click");
 				auto TitleBG = nowScene->getChildByName("Title");
 				if (creditFlag)
 				{

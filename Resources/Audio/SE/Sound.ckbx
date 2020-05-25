@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<bank name="Sound">
+    <sound name="shot" source="shot.wav" />
+    <sound name="click" source="click.wav" />
+    <sound name="damage" source="damage.wav" />
+</bank>

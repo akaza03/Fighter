@@ -29,6 +29,31 @@ set(APP_NAME Fighter)
 
 project(${APP_NAME})
 
+
+
+set(CK_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/Classes/cricket)
+
+include_directories(
+        ${CK_ROOT}/inc
+)
+
+link_directories(
+        ${CK_ROOT}/lib/android/ndk/${ANDROID_ABI}/debug
+)
+link_libraries(
+        ${CK_ROOT}/lib/android/ndk/${ANDROID_ABI}/debug/libck.a
+)
+
+include(AndroidNdkModules)
+android_ndk_import_module_cpufeatures()
+
+target_link_libraries(
+        cpufeatures
+)
+
+
+
+
 set(COCOS2DX_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cocos2d)
 set(CMAKE_MODULE_PATH ${COCOS2DX_ROOT_PATH}/cmake/Modules/)
 
@@ -57,6 +82,8 @@ list(APPEND GAME_SOURCE
      Classes/manager/AnimManager.cpp
      Classes/manager/ResourceManager.cpp
      Classes/manager/ScoreManager.cpp
+     Classes/manager/AudioManager.cpp
+     Classes/manager/EffManager.cpp
      Classes/map/MapMaker.cpp
      Classes/scene/TitleScene.cpp
      Classes/scene/GameMain.cpp
@@ -83,6 +110,8 @@ list(APPEND GAME_HEADER
      Classes/manager/AnimManager.h
      Classes/manager/ResourceManager.h
      Classes/manager/ScoreManager.h
+     Classes/manager/AudioManager.h
+     Classes/manager/EffManager.h
      Classes/map/MapMaker.h
      Classes/scene/TitleScene.h
      Classes/scene/GameMain.h

@@ -20,6 +20,10 @@ void Number::setAlignCenter()
 void Number::setNumber(int num)
 {
 	RemoveNumber();
+	if (num < 0)
+	{
+		num = 0;
+	}
 	CreateNumber(num);
 }
 

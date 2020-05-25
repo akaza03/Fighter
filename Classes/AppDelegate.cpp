@@ -25,6 +25,7 @@
 #include "AppDelegate.h"
 #include "scene/TitleScene.h"
 #include "scene/GameMain.h"
+#include "manager/AudioManager.h"
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -113,6 +114,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 
+	lpAudioManager.PauseAudio();
+
 #if USE_AUDIO_ENGINE
     AudioEngine::pauseAll();
 #elif USE_SIMPLE_AUDIO_ENGINE
@@ -124,6 +127,8 @@ void AppDelegate::applicationDidEnterBackground() {
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
+
+	lpAudioManager.ReStartAudio();
 
 #if USE_AUDIO_ENGINE
     AudioEngine::resumeAll();

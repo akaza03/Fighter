@@ -26,9 +26,11 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include <memory>
 #include "UIClass/Number.h"
-#include "input/OprtState.h"
-#include "manager/ResourceManager.h"
+#include "Input/OprtKey.h"
+#include "Input/UseKey.h"
+#include "ck/sound.h"
 
  //	システム用キー(now,old)
 using sysKey = std::map <UseKey, std::pair<bool, bool>>;

@@ -1,6 +1,4 @@
 #pragma once
-//#ifndef __HELLOWORLD_SCENE_H__
-//#define __HELLOWORLD_SCENE_H__
 #include "cocos2d.h"
 #include "input/OprtKey.h"
 #include "input/UseKey.h"

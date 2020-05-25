@@ -96,6 +96,9 @@ bool GameMain::init()
 	EMLayer->setCameraMask(static_cast<int>(CameraFlag::USER1), true);
 	FGLayer->setCameraMask(static_cast<int>(CameraFlag::USER1), true);
 
+	//	BGMの設定
+	lpAudioManager.SetSound("music.cks");
+
 	//	操作イベントの作成
 	//	プラットフォームによって操作方法を変える
 	if ((CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX))
@@ -115,6 +118,8 @@ bool GameMain::init()
 
 void GameMain::update(float d)
 {
+	//	Audioの更新
+	lpAudioManager.update();
 	//	スコアの更新
 	lpScoreMng.update();
 	//	キーの更新

@@ -126,6 +126,8 @@ void GameMain::update(float d)
 	keyUpdate();
 	//	cameraの更新
 	cameraUpdate();
+	//	エフェクトの更新
+	lpEffectManager.update(_camera);
 	//	制限時間の更新
 	timeUpdate();
 	//	ゲームクリア判断

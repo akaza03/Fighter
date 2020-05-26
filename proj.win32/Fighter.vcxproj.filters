@@ -34,6 +34,9 @@
     <Filter Include="CricketJni">
       <UniqueIdentifier>{8803f929-c5ae-4179-9fd2-cdee71895968}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Effekseer">
+      <UniqueIdentifier>{07fce563-9f56-4e55-9088-3c28d5c8cf2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -116,6 +119,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\manager\EffManager.cpp">
       <Filter>manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Effekseer\Effekseer.cpp">
+      <Filter>Effekseer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Effekseer\EffekseerNative.cpp">
+      <Filter>Effekseer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Effekseer\EffekseerRendererNative.cpp">
+      <Filter>Effekseer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +217,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\manager\EffManager.h">
       <Filter>manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Effekseer\Effekseer.h">
+      <Filter>Effekseer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Effekseer\EffekseerNative.h">
+      <Filter>Effekseer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Effekseer\EffekseerRendererNative.h">
+      <Filter>Effekseer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

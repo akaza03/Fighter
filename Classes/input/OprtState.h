@@ -1,6 +1,6 @@
 #pragma once
 #include <cocos2d.h>
-#include "Manager/AnimManager.h"
+#include "manager/AnimManager.h"
 
 //	‰Ÿ‚³‚ê‚½‚©‚Ç‚¤‚©‚Ì”»’è—pList
 using OprtKeyList = std::map<UseKey, bool>;

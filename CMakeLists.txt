@@ -75,6 +75,9 @@ endif()
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
      Classes/CricketJni/CricketJni.cpp
+     Classes/Effekseer/Effekseer.cpp
+     Classes/Effekseer/EffekseerNative.cpp
+     Classes/Effekseer/EffekseerRendererNative.cpp
      Classes/input/OprtState.cpp
      Classes/input/OprtKey.cpp
      Classes/input/OprtTouch.cpp
@@ -103,6 +106,9 @@ list(APPEND GAME_SOURCE
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
      Classes/CricketJni/CricketJni.h
+     Classes/Effekseer/Effekseer.h
+     Classes/Effekseer/EffekseerNative.h
+     Classes/Effekseer/EffekseerRendererNative.h
      Classes/input/OprtState.h
      Classes/input/OprtKey.h
      Classes/input/OprtTouch.h

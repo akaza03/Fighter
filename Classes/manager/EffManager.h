@@ -1,11 +1,11 @@
 #pragma once
 #include <memory>
 #include <cocos2d.h>
-//#include <Effekseer/Effekseer.h>
+#include <Effekseer/Effekseer.h>
 
 #define lpEffectManager EffManager::GetInstance()
 
-//using EffectList = std::map < std::string, efk::Effect* >;
+using EffectList = std::map < std::string, efk::Effect* >;
 
 class EffManager : public cocos2d::Scene
 {
@@ -30,14 +30,14 @@ private:
 
 	void EffectListInit();
 
-	//std::unique_ptr<efk::EffectManager> effectMng;
-	//void visit(cocos2d::Renderer *renderer, const cocos2d::Mat4& parentTransform, uint32_t parentFlags)
-	//{
-	//	effectMng->begin(renderer, _globalZOrder);
-	//	cocos2d::Scene::visit(renderer, parentTransform, parentFlags);
-	//	effectMng->end(renderer, _globalZOrder);
-	//}
+	std::unique_ptr<efk::EffectManager> effectMng;
+	void visit(cocos2d::Renderer *renderer, const cocos2d::Mat4& parentTransform, uint32_t parentFlags)
+	{
+		effectMng->begin(renderer, _globalZOrder);
+		cocos2d::Scene::visit(renderer, parentTransform, parentFlags);
+		effectMng->end(renderer, _globalZOrder);
+	}
 
-	//EffectList effectList;
+	EffectList effectList;
 };
 

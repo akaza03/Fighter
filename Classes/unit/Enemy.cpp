@@ -37,6 +37,8 @@ void Enemy::update(float d)
 
 		EnemyCreate();
 
+		lpEffectManager.SetEffect(RES_ID("deathEff").c_str(), "FGLayer", true, getPosition(), 20, true);
+
 		layer->removeChild(this);
 	}
 }

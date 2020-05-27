@@ -129,6 +129,9 @@
     <ClCompile Include="..\Classes\Effekseer\EffekseerRendererNative.cpp">
       <Filter>Effekseer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\module\Blow.cpp">
+      <Filter>module</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Effekseer\EffekseerRendererNative.h">
       <Filter>Effekseer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\module\Blow.h">
+      <Filter>module</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

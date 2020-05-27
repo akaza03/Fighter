@@ -28,7 +28,7 @@ bool Move::operator()(cocos2d::Sprite & sp, ActData & act)
 			}
 		}
 	}
-	act.distance = dis;
+	act.distance = cocos2d::Vec2(dis,0);
 
 	return false;
 }

@@ -148,9 +148,10 @@ void Character::unitUpdate(ActData & act)
 
 	if (act.HP <= 0)
 	{
-		if (act.anim == AnimState::DIE && act.damageCnt <= 0)
+		if (act.anim == AnimState::DIE && act.damageCnt == 0)
 		{
 			deathFlag = true;
+			_actData.damageCnt = -1;
 		}
 
 		if (oldHp != act.HP)

@@ -52,7 +52,7 @@ void AudioManager::SetSound(const std::string name)
 	auto sound = audioList[name];
 	if (sound != nullptr)
 	{
-		sound->play();
+		//sound->play();
 	}
 }
 

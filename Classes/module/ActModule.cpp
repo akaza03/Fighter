@@ -5,11 +5,10 @@ void ActModule::operator()(cocos2d::Sprite & sp, ActData & act)
 {
 	//	移動処理
 	Move()(sp, act);
-	//if (act.cType == CharaType::PLAYER)
-	{
-		//	攻撃
-		Attack()(sp, act);
-	}
+	//	敵が死亡時の吹き飛び処理
+	Blow()(sp, act);
+	//	攻撃
+	Attack()(sp, act);
 	//	向きの更新
 	DirCheck()(sp, act);
 	//	アニメーションの更新

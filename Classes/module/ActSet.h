@@ -1,6 +1,7 @@
 #pragma once
 #include "DamageCheck.h"
 #include "Move.h"
+#include "Blow.h"
 #include "Attack.h"
 #include "DirCheck.h"
 #include "AnimUpdate.h"

@@ -39,7 +39,17 @@ void Enemy::update(float d)
 
 		lpEffectManager.SetEffect(RES_ID("deathEff").c_str(), "FGLayer", true, getPosition(), 20, true);
 
-		layer->removeChild(this);
+		deathFlag = false;
+	}
+
+	if (_actData.nowAnim == AnimState::DIE)
+	{
+		if (getPosition().x <= 0 || getPosition().x >= lpMapMaker.GetMapSize().width)
+		{
+			auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
+			auto layer = nowScene->getChildByName("EMLayer");
+			layer->removeChild(this);
+		}
 	}
 }
 

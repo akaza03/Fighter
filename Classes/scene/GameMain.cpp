@@ -155,7 +155,7 @@ void GameMain::SetUI()
 	time->setSpan(40);
 	time->setPrefix("number");
 	UILayer->addChild(time, 1, "timeCounter");
-	timeCount = 60 * 10;
+	timeCount = 120 * 10;
 	timeUpdate();
 }
 
@@ -207,9 +207,11 @@ void GameMain::timeUpdate()
 		for (auto obj : PLLayer->getChildren())
 		{
 			Character* pl = (Character*)obj;
+
+			//	プレイヤーがダメージを受けた場合は時間を減らす
 			if (pl->GetDamage() != 0)
 			{
-				timeCount -= 30;
+				timeCount -= 100;
 			}
 		}
 

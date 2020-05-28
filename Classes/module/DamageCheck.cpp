@@ -42,6 +42,7 @@ bool DamageCheck::operator()(cocos2d::Sprite & sp, ActData & act)
 					enemy->SetDamage(1);
 					enemy->SetDamageCnt(10);
 					
+					//	プレイヤーがダメージを受けた場合はスコアを減らす
 					if (act.cType == CharaType::ENEMY)
 					{
 						lpScoreMng.PlusScore(-200);

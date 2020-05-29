@@ -21,20 +21,37 @@ public:
 
 	void SetNumber(cocos2d::Layer* layer);
 
+	//	スコア関連
 	int GetScore();
 	void SetScore(int number);
 
 	void PlusScore(int number);
-	void ResetScore(cocos2d::Layer* layer);
+
+	//	フィーバー関連
+	float GetFeverCnt();
+	void SetFeverCnt(float number);
+
+	void PlusFeverCnt(float number);
+
+	bool GetFever();
+	void SetFever(bool flag);
 
 	void update();
+
+	void SetFeverNumber(cocos2d::Layer* layer);
 
 private:
 	ScoreManager();
 
 	int score;				//	スコア
+	float feverCount;		//	フィーバー用カウント
+	bool feverFlag;			//	フィーバー中かどうか
+
+	void feverUpdate();
 	
 	Number* number;
+
+	Number* feverNumber;
 
 	static ScoreManager* s_Instance;
 };

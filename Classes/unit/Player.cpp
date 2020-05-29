@@ -15,13 +15,16 @@ void Player::update(float d)
 	{
 		if (itr.second.nowAnim == itr.second.anim)
 		{
-			//	キーのチェック
-			for (auto checkKey : _oprtState->GetKeyList())
+			if (!gameEndFlag)
 			{
-				//	そのキーが登録されていればキーを更新する
-				if (std::get<2>(itr.second.key[checkKey.first]))
+				//	キーのチェック
+				for (auto checkKey : _oprtState->GetKeyList())
 				{
-					std::get<0>(itr.second.key[checkKey.first]) = checkKey.second;
+					//	そのキーが登録されていればキーを更新する
+					if (std::get<2>(itr.second.key[checkKey.first]))
+					{
+						std::get<0>(itr.second.key[checkKey.first]) = checkKey.second;
+					}
 				}
 			}
 
@@ -45,11 +48,9 @@ void Player::update(float d)
 		}
 	}
 
-	if (deathFlag)
+	if (lpScoreMng.GetFever())
 	{
-		//auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
-		//auto layer = nowScene->getChildByName("PLLayer");
-		//layer->removeChild(this);
+		lpScoreMng.PlusFeverCnt(-1);
 	}
 }
 

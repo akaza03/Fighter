@@ -239,3 +239,8 @@ bool Character::GetAtkMiss()
 {
 	return _actData.atkMiss;
 }
+
+void Character::SetGameEnd(bool flag)
+{
+	gameEndFlag = flag;
+}

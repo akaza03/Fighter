@@ -92,7 +92,8 @@ private:
 	cocos2d::Size confScSize;			//	設定上の画面サイズ
 	cocos2d::Size scSize;				//	実際の画面サイズ
 
-	float timeCount;
+	float timeCount;					//	残り時間
+
 	bool pauseFlag;
 	bool gameEndFlag;
     

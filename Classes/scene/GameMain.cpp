@@ -58,6 +58,8 @@ bool GameMain::init()
 	scSize = cocos2d::Director::getInstance()->getOpenGLView()->getFrameSize();
 	lpScoreMng.InitNumber();
 	lpScoreMng.SetScore(0);
+	lpScoreMng.SetFeverCnt(0);
+	lpScoreMng.SetFever(false);
 	gameEndFlag = false;
 
 	BGLayer = Layer::create();
@@ -83,6 +85,8 @@ bool GameMain::init()
 	lpMapMaker.SetChara(CharaType::ENEMY, EMLayer, this);
 
 	lpScoreMng.SetNumber(UILayer);
+
+	lpScoreMng.SetFeverNumber(UILayer);
 
 	//	カメラのセット
 	_camera = Camera::createOrthographic(confScSize.width, confScSize.height, 0, 1000);
@@ -149,6 +153,20 @@ void GameMain::SetUI()
 	fadeImage->setColor(Color3B(0, 0, 0));
 	fadeImage->setOpacity(0);
 	BWLayer->addChild(fadeImage, 0, "fade");
+
+	auto feImage = Sprite::create(RES_ID("feverBase"));
+	feImage->setPosition(feImage->getContentSize().width, feImage->getContentSize().height);
+	feImage->setOpacity(150);
+	UILayer->addChild(feImage, 1, "feverBase");
+
+	feImage = Sprite::create(RES_ID("feverBar"));
+	feImage->setPosition(feImage->getContentSize().width, feImage->getContentSize().height);
+	feImage->setOpacity(200);
+	UILayer->addChild(feImage, 1, "feverBar");
+
+	feImage = Sprite::create(RES_ID("feverFront"));
+	feImage->setPosition(feImage->getContentSize().width, feImage->getContentSize().height);
+	UILayer->addChild(feImage, 1, "feverFront");
 
 	time = Number::create();
 	time->setPosition(confScSize.width / 2, confScSize.height - 40);
@@ -268,8 +286,21 @@ void GameMain::screenUpdate()
 	{
 		if (!gameEndFlag)
 		{
-			pause(PLLayer);
-			pause(EMLayer);
+			auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
+			auto layer = nowScene->getChildByName("PLLayer");
+			for (auto obj : layer->getChildren())
+			{
+				Character* chara = (Character*)obj;
+				chara->SetGameEnd(true);
+			}
+
+			layer = nowScene->getChildByName("EMLayer");
+			for (auto obj : layer->getChildren())
+			{
+				Character* chara = (Character*)obj;
+				chara->SetGameEnd(true);
+			}
+
 			pause(BGLayer);
 			pause(FGLayer);
 			darkScreen();
@@ -281,11 +312,13 @@ void GameMain::screenUpdate()
 			endSchedule();
 
 			auto fadeTime = 2.0f;
-			//lpAudioManager.ResetAudio();
-			//lpAudioManager.SetSound("click");
+			lpAudioManager.ResetAudio();
+			lpAudioManager.SetSound("click");
 			auto scene = TitleScene::createScene();
 
-			lpScoreMng.ResetScore(UILayer);
+			lpScoreMng.SetScore(0);
+			lpScoreMng.SetFeverCnt(0);
+			lpScoreMng.SetFever(false);
 			auto fade = TransitionFade::create(fadeTime, scene);
 			Director::getInstance()->replaceScene(fade);
 		}

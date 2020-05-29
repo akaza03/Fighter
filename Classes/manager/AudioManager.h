@@ -28,6 +28,9 @@ public:
 	}
 	~AudioManager();
 
+	//	ゲーム終了時にAppDelegateからcricketを止める
+	void AudioShutDown();
+
 	void update();
 
 	//	音の再生(ストリーミングの場合はファイル名、オンメモリの場合はサウンド名)

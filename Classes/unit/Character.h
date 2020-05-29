@@ -51,7 +51,7 @@ public:
 	virtual void update(float d) = 0;
 	bool SetInit(int id, cocos2d::Vec2 pos, int hp, float speed, DIR dir, cocos2d::Scene *scene);
 
-	AnimState GetAnim();									//	現在のアニメーションを取得
+	AnimState GetAnim();							//	現在のアニメーションを取得
 
 	//	ダメージのセットゲット
 	void SetDamage(int number);
@@ -67,20 +67,24 @@ public:
 	//	攻撃が当たったかどうかの確認
 	bool GetAtkMiss();
 
+	//	ゲーム終了のセット
+	void SetGameEnd(bool flag);
+
 private:
-	void InitActData();										//	ActDataの初期化
+	void InitActData();								//	ActDataの初期化
 protected:
-	OprtState *_oprtState;									//	操作制御
-	ActData _actData;										//	キャラクターの情報用
-	std::map<const char *,ActData> _charaList;				//	キャラクターの情報用リスト
+	OprtState *_oprtState;							//	操作制御
+	ActData _actData;								//	キャラクターの情報用
+	std::map<const char *,ActData> _charaList;		//	キャラクターの情報用リスト
 
 	cocos2d::Vec2 oldTouchPos;
 	bool deathFlag = false;
+	bool gameEndFlag = false;						//	ゲーム終了フラグ
 
 	char *nowAnimName(AnimState animName);
 
 	AnimMap _animMap;
 
-	void unitUpdate(ActData & act);							//	unit共通のupdate処理
+	void unitUpdate(ActData & act);					//	unit共通のupdate処理
 
 };

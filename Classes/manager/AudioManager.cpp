@@ -21,13 +21,6 @@ AudioManager::AudioManager()
 
 AudioManager::~AudioManager()
 {
-	for (auto &itr : audioList)
-	{
-		itr.second->destroy();
-	}
-	audioList.erase(audioList.begin(), audioList.end());
-
-	CkShutdown();
 }
 
 void AudioManager::AudioListInit()
@@ -40,6 +33,17 @@ void AudioManager::AudioListInit()
 	SetBank("Sound.ckb", "click", SoundType::S_SE);
 	SetBank("Sound.ckb", "shot", SoundType::S_SE);
 	SetBank("Sound.ckb", "damage", SoundType::S_SE);
+}
+
+void AudioManager::AudioShutDown()
+{
+	for (auto &itr : audioList)
+	{
+		itr.second->destroy();
+	}
+	audioList.erase(audioList.begin(), audioList.end());
+
+	CkShutdown();
 }
 
 void AudioManager::update()

@@ -26,6 +26,7 @@
 #include "scene/TitleScene.h"
 #include "scene/GameMain.h"
 #include "manager/AudioManager.h"
+#include "manager/EffManager.h"
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -57,6 +58,8 @@ AppDelegate::~AppDelegate()
 #elif USE_SIMPLE_AUDIO_ENGINE
     SimpleAudioEngine::end();
 #endif
+
+	lpAudioManager.AudioShutDown();
 }
 
 // if you want a different context, modify the value of glContextAttrs

@@ -10,6 +10,7 @@ ResourceManager::ResourceManager()
 ResourceManager::~ResourceManager()
 {
 }
+
 std::string ResourceManager::GetID(std::string key)
 {
 	if (resMap.find(key) == resMap.end())
@@ -43,7 +44,8 @@ void ResourceManager::LoadInit()
 	SetID("e2unit", "image/enemy/02-unit.png");
 	SetID("e3unit", "image/enemy/03-unit.png");
 	//	背景
-	SetID("Title", "image/title(kari).png");
+	SetID("Title", "image/title.png");
+	SetID("MainBack", "image/MainBack.png");
 	//	エフェクト
 	SetID("changeEff", "effect/Laser01.efk");
 	SetID("hitEff", "effect/hit.efk");

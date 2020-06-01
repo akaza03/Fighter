@@ -18,12 +18,6 @@ void ScoreManager::InitNumber()
 	number->setPosition(confScSize.width - 60, confScSize.height - 40);
 	number->setSpan(40);
 	number->setPrefix("number");
-
-	//	デバッグ用
-	feverNumber = Number::create();
-	feverNumber->setPosition(120, confScSize.height - 40);
-	feverNumber->setSpan(40);
-	feverNumber->setPrefix("number");
 }
 
 void ScoreManager::SetNumber(cocos2d::Layer* layer)
@@ -103,13 +97,26 @@ void ScoreManager::feverUpdate()
 	if (!feverFlag)
 	{
 
-		if (feverCount >= 100)
+		if (feverCount >= 300)
 		{
-			feverCount = 100;
+			feverCount = 300;
 			feverFlag = true;
 		}
 	}
 
-	//	デバッグ用
-	feverNumber->setNumber(feverCount);
+	//	フィーバー用バーの更新
+	auto layer = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("UILayer");
+	cocos2d::Sprite* FBar = (cocos2d::Sprite*) layer->getChildByName("feverBar");
+	//	最大HPから見た現在のHPの割合
+	float Percent = feverCount / 300;
+	//	一旦戻す
+	auto oldSize = FBar->getScaleX();
+	float ImageSizeX = FBar->getContentSize().width * (1 - oldSize);
+	FBar->setPosition(FBar->getPosition().x + ImageSizeX / 2, FBar->getPosition().y);
+
+	//	HPバーの拡大縮小(X座標のみ)
+	FBar->setScale(Percent, 1);
+	//	増減した分の位置補正
+	ImageSizeX = FBar->getContentSize().width * (1 - Percent);
+	FBar->setPosition(FBar->getPosition().x - ImageSizeX / 2, FBar->getPosition().y);
 }

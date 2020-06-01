@@ -34,21 +34,32 @@ bool DamageCheck::operator()(cocos2d::Sprite & sp, ActData & act)
 			//	それぞれのBOXを判定
 			if (rect.intersectsRect(objBox))
 			{
-				//	相手が既にダメージ状態なら処理しない
-				if (enemy->GetAnim() != AnimState::DAMAGE && enemy->GetAnim() != AnimState::DIE
-					&& enemy->GetDamage() == 0 && enemy->GetDamageCnt() == 0)
+				if (!lpScoreMng.GetFever() || act.cType == CharaType::PLAYER)
 				{
-					//	ダメージを与え、相手をのけぞらせる
-					enemy->SetDamage(1);
-					enemy->SetDamageCnt(10);
-					
-					//	プレイヤーがダメージを受けた場合はスコアを減らす
-					if (act.cType == CharaType::ENEMY)
+					//	相手が既にダメージ状態なら処理しない
+					if (enemy->GetAnim() != AnimState::DAMAGE && enemy->GetAnim() != AnimState::DIE
+						&& enemy->GetDamage() == 0 && enemy->GetDamageCnt() == 0)
 					{
-						lpScoreMng.PlusScore(-200);
+						//	ダメージを与え、相手をのけぞらせる
+						enemy->SetDamage(1);
+						if (lpScoreMng.GetFever())
+						{
+							enemy->SetDamageCnt(0);
+						}
+						else
+						{
+							enemy->SetDamageCnt(10);
+						}
+
+						//	プレイヤーがダメージを受けた場合はスコアを減らす
+						if (act.cType == CharaType::ENEMY)
+						{
+							lpScoreMng.PlusScore(-200);
+							lpScoreMng.PlusFeverCnt(-30);
+						}
 					}
+					act.atkHit = true;
 				}
-				act.atkHit = true;
 			}
 		}
 

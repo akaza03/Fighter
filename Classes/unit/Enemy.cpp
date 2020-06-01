@@ -74,7 +74,7 @@ void Enemy::EnemyCreate()
 				break;
 			}
 			lpScoreMng.PlusScore(point);
-			lpScoreMng.PlusFeverCnt(10);
+			lpScoreMng.PlusFeverCnt(30);
 		}
 	}
 }

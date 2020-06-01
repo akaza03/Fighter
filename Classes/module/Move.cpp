@@ -8,18 +8,24 @@ bool Move::operator()(cocos2d::Sprite & sp, ActData & act)
 	{
 		if (act.anim != AnimState::DAMAGE && act.anim != AnimState::DIE && act.moveFlag)
 		{
+			auto mSpeed = act.speed;
+			if (lpScoreMng.GetFever())
+			{
+				mSpeed += act.speed;
+			}
+
 			//	¶ˆÚ“®
 			if (act.dir == DIR::LEFT)
 			{
-				dis -= act.speed;
+				dis -= mSpeed;
 			}
 			//	‰EˆÚ“®
 			if (act.dir == DIR::RIGHT)
 			{
-				dis += act.speed;
+				dis += mSpeed;
 			}
 
-			act.totalDis += act.speed;
+			act.totalDis += mSpeed;
 
 			if (act.totalDis >= 64)
 			{

@@ -86,7 +86,8 @@ bool GameMain::init()
 
 	lpScoreMng.SetNumber(UILayer);
 
-	lpScoreMng.SetFeverNumber(UILayer);
+	//	背景画像をまとめて表示する用
+	lpMapMaker.SetBackImage(RES_ID("MainBack"), BGLayer);
 
 	//	カメラのセット
 	_camera = Camera::createOrthographic(confScSize.width, confScSize.height, 0, 1000);
@@ -154,6 +155,7 @@ void GameMain::SetUI()
 	fadeImage->setOpacity(0);
 	BWLayer->addChild(fadeImage, 0, "fade");
 
+	//	フィーバー用画像
 	auto feImage = Sprite::create(RES_ID("feverBase"));
 	feImage->setPosition(feImage->getContentSize().width, feImage->getContentSize().height);
 	feImage->setOpacity(150);
@@ -168,6 +170,7 @@ void GameMain::SetUI()
 	feImage->setPosition(feImage->getContentSize().width, feImage->getContentSize().height);
 	UILayer->addChild(feImage, 1, "feverFront");
 
+	//	時間用画像
 	time = Number::create();
 	time->setPosition(confScSize.width / 2, confScSize.height - 40);
 	time->setSpan(40);

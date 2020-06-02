@@ -55,8 +55,10 @@ bool DamageCheck::operator()(cocos2d::Sprite & sp, ActData & act)
 						if (act.cType == CharaType::ENEMY)
 						{
 							lpScoreMng.PlusScore(-200);
-							lpScoreMng.PlusFeverCnt(-30);
+							lpScoreMng.PlusFeverCnt(-20);
+							lpAudioManager.SetSound("damage");
 						}
+						lpAudioManager.SetSound("attack");
 					}
 					act.atkHit = true;
 				}

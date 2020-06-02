@@ -1,4 +1,5 @@
 #include "ScoreManager.h"
+#include "AudioManager.h"
 
 ScoreManager* ScoreManager::s_Instance = nullptr;
 
@@ -96,10 +97,10 @@ void ScoreManager::feverUpdate()
 	}
 	if (!feverFlag)
 	{
-
-		if (feverCount >= 300)
+		if (feverCount >= 200)
 		{
-			feverCount = 300;
+			feverCount = 200;
+			lpAudioManager.SetSound("fever");
 			feverFlag = true;
 		}
 	}
@@ -108,7 +109,7 @@ void ScoreManager::feverUpdate()
 	auto layer = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("UILayer");
 	cocos2d::Sprite* FBar = (cocos2d::Sprite*) layer->getChildByName("feverBar");
 	//	Å‘åHP‚©‚çŒ©‚½Œ»Ý‚ÌHP‚ÌŠ„‡
-	float Percent = feverCount / 300;
+	float Percent = feverCount / 200;
 	//	ˆê’U–ß‚·
 	auto oldSize = FBar->getScaleX();
 	float ImageSizeX = FBar->getContentSize().width * (1 - oldSize);

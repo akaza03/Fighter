@@ -1,4 +1,0 @@
-<?xml vertion="1.0" encoding="utf-8" ?>
-<bank name="BGM">
-    <sound name="stage1" source="music.wav"/>
-</bank>

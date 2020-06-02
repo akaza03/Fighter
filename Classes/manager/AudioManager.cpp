@@ -27,12 +27,14 @@ void AudioManager::AudioListInit()
 {
 	//	‚Ü‚¸‚±‚±‚Å‰¹‚ð“o˜^
 	SetStream("titleBGM.cks", SoundType::S_BGM);
-	SetStream("music.cks", SoundType::S_BGM);
+	SetStream("mainBGM.cks", SoundType::S_BGM);
 	SetStream("clearBGM.cks", SoundType::S_BGM);
-	SetStream("gameoverBGM.cks", SoundType::S_BGM);
 	SetBank("Sound.ckb", "click", SoundType::S_SE);
-	SetBank("Sound.ckb", "shot", SoundType::S_SE);
+	SetBank("Sound.ckb", "blow", SoundType::S_SE);
+	SetBank("Sound.ckb", "attack", SoundType::S_SE);
+	SetBank("Sound.ckb", "fever", SoundType::S_SE);
 	SetBank("Sound.ckb", "damage", SoundType::S_SE);
+	SetBank("Sound.ckb", "gameEnd", SoundType::S_SE);
 }
 
 void AudioManager::AudioShutDown()
@@ -56,7 +58,7 @@ void AudioManager::SetSound(const std::string name)
 	auto sound = audioList[name];
 	if (sound != nullptr)
 	{
-		//sound->play();
+		sound->play();
 	}
 }
 

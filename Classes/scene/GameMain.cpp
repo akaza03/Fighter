@@ -102,7 +102,7 @@ bool GameMain::init()
 	FGLayer->setCameraMask(static_cast<int>(CameraFlag::USER1), true);
 
 	//	BGMの設定
-	lpAudioManager.SetSound("music.cks");
+	lpAudioManager.SetSound("mainBGM.cks");
 
 	//	操作イベントの作成
 	//	プラットフォームによって操作方法を変える
@@ -307,6 +307,10 @@ void GameMain::screenUpdate()
 			pause(BGLayer);
 			pause(FGLayer);
 			darkScreen();
+
+			lpAudioManager.StopSound("mainBGM.cks");
+			lpAudioManager.SetSound("gameEnd");
+
 			gameEndFlag = true;
 		}
 

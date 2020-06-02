@@ -38,6 +38,7 @@ void Enemy::update(float d)
 		EnemyCreate();
 
 		lpEffectManager.SetEffect(RES_ID("deathEff").c_str(), "FGLayer", true, getPosition(), 20, true);
+		lpAudioManager.SetSound("blow");
 
 		deathFlag = false;
 	}
@@ -74,7 +75,7 @@ void Enemy::EnemyCreate()
 				break;
 			}
 			lpScoreMng.PlusScore(point);
-			lpScoreMng.PlusFeverCnt(30);
+			lpScoreMng.PlusFeverCnt(20);
 		}
 	}
 }

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<bank name="Sounds">
-    <sound name="music" source="music.wav" />
-</bank>

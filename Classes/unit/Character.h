@@ -30,8 +30,8 @@ struct ActData
 	float totalDis = 0;								//	合計移動距離
 	bool moveFlag = false;							//	敵の移動用フラグ
 	bool atkFlag = false;							//	攻撃中かどうか
-	bool atkHit = false;							//	
-	bool atkMiss = false;							//	攻撃が当たったかどうか
+	bool atkHit = false;							//	攻撃が当たったかどうか
+	bool atkMiss = false;							//	攻撃が外れたかどうか
 	cocos2d::Vec2 touchPos;							//	タッチ座標
 	bool dirInver = false;							//	方向転換する場合はtrue
 	DIR dir = DIR::RIGHT;							//	現在の向き
@@ -39,7 +39,7 @@ struct ActData
 	AnimState anim;									//	自身のアニメーション
 	AnimState nowAnim = AnimState::IDLE;			//	現在のアニメーション
 	CharaType cType;								//	キャラクターのタイプ
-	int charaID;
+	int charaID;									//	キャラクターのID
 };
 
 class Character
@@ -78,7 +78,7 @@ protected:
 	std::map<const char *,ActData> _charaList;		//	キャラクターの情報用リスト
 
 	cocos2d::Vec2 oldTouchPos;
-	bool deathFlag = false;
+	bool deathFlag = false;							//	死亡フラグ
 	bool gameEndFlag = false;						//	ゲーム終了フラグ
 
 	char *nowAnimName(AnimState animName);

@@ -41,8 +41,6 @@ void ResourceManager::LoadInit()
 	SetID("p0unit", "image/player/00-unit.png");
 	SetID("e0unit", "image/enemy/00-unit.png");
 	SetID("e1unit", "image/enemy/01-unit.png");
-	SetID("e2unit", "image/enemy/02-unit.png");
-	SetID("e3unit", "image/enemy/03-unit.png");
 	//	îwåi
 	SetID("Title", "image/title.png");
 	SetID("MainBack", "image/MainBack.png");

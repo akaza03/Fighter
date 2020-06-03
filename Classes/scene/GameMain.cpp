@@ -176,7 +176,7 @@ void GameMain::SetUI()
 	time->setSpan(40);
 	time->setPrefix("number");
 	UILayer->addChild(time, 1, "timeCounter");
-	timeCount = 120 * 10;
+	timeCount = 200 * 10 + 10;
 	timeUpdate();
 }
 
@@ -246,15 +246,16 @@ void GameMain::startSchedule(float d)
 	this->scheduleUpdate();
 
 	auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
-	auto layer = nowScene->getChildByName("PLLayer");
 
+	//	プレイヤーのスケジュールセット
+	auto layer = nowScene->getChildByName("PLLayer");
 	for (auto obj : layer->getChildren())
 	{
 		obj->scheduleUpdate();
 	}
 
+	//	エネミーのスケジュールセット
 	layer = nowScene->getChildByName("EMLayer");
-
 	for (auto obj : layer->getChildren())
 	{
 		obj->scheduleUpdate();
@@ -266,15 +267,16 @@ void GameMain::endSchedule()
 	this->unscheduleAllSelectors();
 
 	auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
-	auto layer = nowScene->getChildByName("PLLayer");
 
+	//	プレイヤーのスケジュール削除
+	auto layer = nowScene->getChildByName("PLLayer");
 	for (auto obj : layer->getChildren())
 	{
 		obj->unscheduleAllSelectors();
 	}
 
+	//	エネミーのスケジュール削除
 	layer = nowScene->getChildByName("EMLayer");
-
 	for (auto obj : layer->getChildren())
 	{
 		obj->unscheduleAllSelectors();
@@ -289,6 +291,7 @@ void GameMain::screenUpdate()
 	{
 		if (!gameEndFlag)
 		{
+			//	プレイヤーとエネミーにゲーム終了の合図を送る
 			auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
 			auto layer = nowScene->getChildByName("PLLayer");
 			for (auto obj : layer->getChildren())

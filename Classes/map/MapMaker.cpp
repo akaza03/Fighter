@@ -106,8 +106,9 @@ void MapMaker::SetChara(CharaType type, cocos2d::Layer * addLayer, cocos2d::Scen
 						case 0:
 							hp = 1;
 							break;
-						case 1:
+						case 2:
 							hp = 3;
+							enemyID = 1;
 							break;
 						default:
 							break;

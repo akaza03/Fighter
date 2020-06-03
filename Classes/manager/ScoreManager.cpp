@@ -15,6 +15,7 @@ void ScoreManager::InitNumber()
 {
 	auto confScSize = cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
 
+	//	制限時間のセット
 	number = Number::create();
 	number->setPosition(confScSize.width - 60, confScSize.height - 40);
 	number->setSpan(40);
@@ -87,6 +88,7 @@ void ScoreManager::update()
 
 void ScoreManager::feverUpdate()
 {
+	//	フィーバーの終了
 	if (feverCount <= 0)
 	{
 		feverCount = 0;
@@ -97,6 +99,7 @@ void ScoreManager::feverUpdate()
 	}
 	if (!feverFlag)
 	{
+		//	フィーバーの開始
 		if (feverCount >= 200)
 		{
 			feverCount = 200;

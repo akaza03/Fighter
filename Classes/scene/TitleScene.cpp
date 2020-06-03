@@ -36,6 +36,7 @@ bool TitleScene::init()
 	BGSP->setPosition(Vec2(0, 0));
 	this->addChild(BGSP, 0, "Title");
 
+
 	SetUI();
 
 	//	プラットフォームによって操作方法を変える
@@ -236,8 +237,8 @@ void TitleScene::SetUI()
 	auto scSize = cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
 
 	auto BGSP = Sprite::create(RES_ID("logo"));
-	//BGSP->setPosition(scSize / 2);
-	//this->addChild(BGSP, 1, "logo");
+	BGSP->setPosition(scSize.width / 2, scSize.height / 2 + 50);
+	this->addChild(BGSP, 1, "logo");
 
 	BGSP = Sprite::create(RES_ID("GameStart"));
 	BGSP->setPosition(scSize.width / 2, scSize.height / 2 - 120);

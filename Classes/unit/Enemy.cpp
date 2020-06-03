@@ -29,14 +29,17 @@ void Enemy::update(float d)
 		auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
 		auto layer = nowScene->getChildByName("EMLayer");
 
+		//	エネミーを全員スライドさせる
 		for (auto obj : layer->getChildren())
 		{
 			Character* enemy = (Character*)obj;
 			enemy->SetMoveFlag(true);
 		}
 
+		//	新しくエネミーを生み出す
 		EnemyCreate();
 
+		//	エフェクトとサウンドを発生させる
 		lpEffectManager.SetEffect(RES_ID("deathEff").c_str(), "FGLayer", true, getPosition(), 20, true);
 		lpAudioManager.SetSound("blow");
 
@@ -47,6 +50,7 @@ void Enemy::update(float d)
 	{
 		if (getPosition().x <= 0 || getPosition().x >= lpMapMaker.GetMapSize().width)
 		{
+			//	自身をエネミーレイヤーから削除する
 			auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
 			auto layer = nowScene->getChildByName("EMLayer");
 			layer->removeChild(this);
@@ -62,6 +66,7 @@ void Enemy::EnemyCreate()
 		{
 			lpMapMaker.SetEnemy(itr.second.charaID, itr.second.dir);
 
+			//	スコアとフィーバーカウントを増やす
 			auto point = 1;
 			switch (itr.second.charaID)
 			{

@@ -94,6 +94,13 @@ void ScoreManager::feverUpdate()
 		feverCount = 0;
 		if (feverFlag)
 		{
+			//	フィーバー用の画像を非表示に
+			auto layer = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("UILayer");
+			cocos2d::Sprite* feverSp = (cocos2d::Sprite*) layer->getChildByName("fever");
+			feverSp->setOpacity(0);
+			cocos2d::Sprite* fLineSp = (cocos2d::Sprite*) layer->getChildByName("fLine");
+			fLineSp->setOpacity(0);
+
 			feverFlag = false;
 		}
 	}
@@ -102,6 +109,13 @@ void ScoreManager::feverUpdate()
 		//	フィーバーの開始
 		if (feverCount >= 200)
 		{
+			//	フィーバー用の画像表示
+			auto layer = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("UILayer");
+			cocos2d::Sprite* feverSp = (cocos2d::Sprite*) layer->getChildByName("fever");
+			feverSp->setOpacity(255);
+			cocos2d::Sprite* fLineSp = (cocos2d::Sprite*) layer->getChildByName("fLine");
+			fLineSp->setOpacity(255);
+
 			feverCount = 200;
 			lpAudioManager.SetSound("fever");
 			feverFlag = true;

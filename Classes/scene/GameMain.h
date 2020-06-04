@@ -96,6 +96,9 @@ private:
 
 	bool pauseFlag;
 	bool gameEndFlag;
+	
+	bool shakeLR;						//	画面を揺らす際の左右フラグ
+	int shakeTime;						//	画面を揺らす際の時間計測用
     
     // implement the "static create()" method manually
     CREATE_FUNC(GameMain);

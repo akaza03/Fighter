@@ -1,4 +1,5 @@
 #include "map/MapMaker.h"
+#include "Player.h"
 #include "Enemy.h"
 
 
@@ -42,6 +43,10 @@ void Enemy::update(float d)
 		//	エフェクトとサウンドを発生させる
 		lpEffectManager.SetEffect(RES_ID("deathEff").c_str(), "FGLayer", true, getPosition(), 20, true);
 		lpAudioManager.SetSound("blow");
+
+		//	プレイヤーに敵を倒したフラグを付与する
+		Player* player = (Player*)nowScene->getChildByName("PLLayer")->getChildByName("player");
+		player->SetEnemyKill(true);
 
 		deathFlag = false;
 	}

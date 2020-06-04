@@ -45,8 +45,6 @@ void EffManager::SetEffect(const char* pass, const char* layer, bool mask, cocos
 
 	if (effect != nullptr)
 	{
-		//effect->retain();
-
 		auto emitter = efk::EffectEmitter::create(effectMng.get());
 		emitter->setEffect(effect);
 		emitter->setPlayOnEnter(true);

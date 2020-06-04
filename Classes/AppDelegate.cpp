@@ -93,7 +93,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
 	//	デバッグ時FPS表示
-    director->setDisplayStats(true);
+    //director->setDisplayStats(true);
 
 
     // set FPS. the default value is 1.0/60 if you don't call this

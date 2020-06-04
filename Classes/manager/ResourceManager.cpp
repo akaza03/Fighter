@@ -53,4 +53,6 @@ void ResourceManager::LoadInit()
 	SetID("feverBase", "image/UI/BarBase.png");
 	SetID("feverBar", "image/UI/Bar.png");
 	SetID("feverFront", "image/UI/BarFront.png");
+	SetID("fever", "image/UI/fever.png");
+	SetID("fLine", "image/UI/line.png");
 }

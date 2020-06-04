@@ -73,6 +73,8 @@ bool Attack::operator()(cocos2d::Sprite & sp, ActData & act)
 			Character* player = (Character*)obj;
 
 			act.atkFlag = false;
+
+			//	ƒvƒŒƒCƒ„[‚ÌUŒ‚‚ªŽ¸”s‚µ‚½ê‡UŒ‚‚ðŠJŽn‚·‚é
 			if (player->GetAtkMiss() && player->GetAnim() == AnimState::ATK)
 			{
 				if (EnemyHitCheck(sp, act))

@@ -3,6 +3,7 @@
 
 bool Blow::operator()(cocos2d::Sprite & sp, ActData & act)
 {
+	//	“G‚Ìê‡‚«”ò‚Ô
 	if (act.cType == CharaType::ENEMY && act.nowAnim == AnimState::DIE)
 	{
 		auto dis = cocos2d::Vec2(10,3);

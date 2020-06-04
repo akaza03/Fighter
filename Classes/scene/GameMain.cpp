@@ -170,6 +170,17 @@ void GameMain::SetUI()
 	feImage->setPosition(feImage->getContentSize().width, feImage->getContentSize().height);
 	UILayer->addChild(feImage, 1, "feverFront");
 
+	feImage = Sprite::create(RES_ID("fever"));
+	feImage->setPosition(feImage->getContentSize().width, feImage->getContentSize().height * 4);
+	feImage->setOpacity(0);
+	UILayer->addChild(feImage, 1, "fever");
+
+	feImage = Sprite::create(RES_ID("fLine"));
+	feImage->setPosition(confScSize.width / 2, confScSize.height / 2);
+	feImage->setOpacity(0);
+	UILayer->addChild(feImage, 1, "fLine");
+
+
 	//	時間用画像
 	time = Number::create();
 	time->setPosition(confScSize.width / 2, confScSize.height - 40);
@@ -184,32 +195,55 @@ void GameMain::cameraUpdate()
 {
 	Player* player = (Player*)this->getChildByName("PLLayer")->getChildByName("player");
 
-	if (player->GetDamageCnt() <= 0)
+	auto playerPos = player->getPosition();
+	//	マップのサイズ
+	auto mapSize = lpMapMaker.GetMapSize();
+
+	//	プレイヤーからカメラの左端までの距離
+	auto leftDis = playerPos.x - confScSize.width / 2;
+	//	カメラの右端からプレイヤーまでの距離
+	auto rightDis = mapSize.width - playerPos.x;
+
+	//	画面を揺らすフラグ
+	bool shakeFlag = false;
+
+	if (player->GetEnemyKill())
 	{
-		auto playerPos = player->getPosition();
-		//	マップのサイズ
-		auto mapSize = BGLayer->getChildByName("stageMap")->getContentSize();
+		shakeFlag = true;
+		player->SetEnemyKill(false);
+	}
 
-		//	プレイヤーからカメラの左端までの距離
-		auto leftDis = playerPos.x - confScSize.width / 2;
-		//	カメラの右端からプレイヤーまでの距離
-		auto rightDis = mapSize.width - playerPos.x;
-
-		//	左端処理
-		if (leftDis < 0)
+	//	敵が死亡時に画面を揺らす
+	if (shakeFlag)
+	{
+		if (shakeTime < 10)
 		{
-			_camera->setPosition3D(Vec3(0, 0, 0));
+			if (shakeTime % 10 == 0)
+			{
+				auto shakePos = 10;
+				if (shakeLR)
+				{
+					shakeLR = false;
+				}
+				else
+				{
+					shakePos = -shakePos;
+					shakeLR = true;
+				}
+				_camera->setPosition3D(Vec3(playerPos.x - confScSize.width / 2 + shakePos, 0, 0));
+			}
+			shakeTime++;
 		}
-		//	右端処理
-		else if (rightDis < confScSize.width / 2)
-		{
-			_camera->setPosition3D(Vec3(mapSize.width - confScSize.width, 0, 0));
-		}
-		//	通常のスクロール
 		else
 		{
-			_camera->setPosition3D(Vec3(playerPos.x - confScSize.width / 2, 0, 0));
+			shakeFlag = false;
 		}
+	}
+	else
+	{
+		shakeTime = 0;
+		shakeLR = false;
+		_camera->setPosition3D(Vec3(playerPos.x - confScSize.width / 2, 0, 0));
 	}
 }
 
@@ -225,15 +259,12 @@ void GameMain::timeUpdate()
 {
 	if (timeCount > 0 && !pauseFlag)
 	{
-		for (auto obj : PLLayer->getChildren())
-		{
-			Character* pl = (Character*)obj;
+		Character* player = (Character*)PLLayer->getChildByName("player");
 
-			//	プレイヤーがダメージを受けた場合は時間を減らす
-			if (pl->GetDamage() != 0)
-			{
-				timeCount -= 100;
-			}
+		//	プレイヤーがダメージを受けた場合は時間を減らす
+		if (player != nullptr && player->GetDamage() != 0)
+		{
+			timeCount -= 100;
 		}
 
 		timeCount--;
@@ -245,17 +276,13 @@ void GameMain::startSchedule(float d)
 {
 	this->scheduleUpdate();
 
-	auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
-
 	//	プレイヤーのスケジュールセット
-	auto layer = nowScene->getChildByName("PLLayer");
-	for (auto obj : layer->getChildren())
-	{
-		obj->scheduleUpdate();
-	}
+	Character* player = (Character*)PLLayer->getChildByName("player");
+	player->scheduleUpdate();
 
 	//	エネミーのスケジュールセット
-	layer = nowScene->getChildByName("EMLayer");
+	auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
+	auto layer = nowScene->getChildByName("EMLayer");
 	for (auto obj : layer->getChildren())
 	{
 		obj->scheduleUpdate();
@@ -266,17 +293,13 @@ void GameMain::endSchedule()
 {
 	this->unscheduleAllSelectors();
 
-	auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
-
 	//	プレイヤーのスケジュール削除
-	auto layer = nowScene->getChildByName("PLLayer");
-	for (auto obj : layer->getChildren())
-	{
-		obj->unscheduleAllSelectors();
-	}
+	Character* player = (Character*)PLLayer->getChildByName("player");
+	player->unscheduleAllSelectors();
 
 	//	エネミーのスケジュール削除
-	layer = nowScene->getChildByName("EMLayer");
+	auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
+	auto layer = nowScene->getChildByName("EMLayer");
 	for (auto obj : layer->getChildren())
 	{
 		obj->unscheduleAllSelectors();
@@ -292,15 +315,10 @@ void GameMain::screenUpdate()
 		if (!gameEndFlag)
 		{
 			//	プレイヤーとエネミーにゲーム終了の合図を送る
-			auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
-			auto layer = nowScene->getChildByName("PLLayer");
-			for (auto obj : layer->getChildren())
-			{
-				Character* chara = (Character*)obj;
-				chara->SetGameEnd(true);
-			}
+			player->SetGameEnd(true);
 
-			layer = nowScene->getChildByName("EMLayer");
+			auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
+			auto layer = nowScene->getChildByName("EMLayer");
 			for (auto obj : layer->getChildren())
 			{
 				Character* chara = (Character*)obj;
@@ -309,6 +327,7 @@ void GameMain::screenUpdate()
 
 			pause(BGLayer);
 			pause(FGLayer);
+			pause(UILayer);
 			darkScreen();
 
 			lpAudioManager.StopSound("mainBGM.cks");
@@ -342,6 +361,7 @@ void GameMain::screenUpdate()
 			pause(EMLayer);
 			pause(BGLayer);
 			pause(FGLayer);
+			pause(UILayer);
 			darkScreen();
 		}
 	}

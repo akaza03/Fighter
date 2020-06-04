@@ -3,6 +3,7 @@
 Player::Player()
 {
 	_actData.cType = CharaType::PLAYER;
+	enemyKill = false;
 }
 
 Player::~Player()
@@ -52,5 +53,15 @@ void Player::update(float d)
 	{
 		lpScoreMng.PlusFeverCnt(-1);
 	}
+}
+
+bool Player::GetEnemyKill()
+{
+	return enemyKill;
+}
+
+void Player::SetEnemyKill(bool flag)
+{
+	enemyKill = flag;
 }
 

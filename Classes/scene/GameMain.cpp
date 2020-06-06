@@ -61,6 +61,7 @@ bool GameMain::init()
 	lpScoreMng.SetFeverCnt(0);
 	lpScoreMng.SetFever(false);
 	gameEndFlag = false;
+	resultTime = 0;
 
 	BGLayer = Layer::create();
 	this->addChild(BGLayer, LayerNumber::BG, "BGLayer");
@@ -336,21 +337,12 @@ void GameMain::screenUpdate()
 			gameEndFlag = true;
 		}
 
-		if (key[UseKey::K_ENTER].first && !key[UseKey::K_ENTER].second || _oprtState->firstTouch())
+		//	ƒ^ƒCƒgƒ‹‚É–ß‚éˆ—
+		if (key[UseKey::K_ENTER].first && !key[UseKey::K_ENTER].second || (_oprtState->firstTouch() && resultTime > 100))
 		{
-			endSchedule();
-
-			auto fadeTime = 2.0f;
-			lpAudioManager.ResetAudio();
-			lpAudioManager.SetSound("click");
-			auto scene = TitleScene::createScene();
-
-			lpScoreMng.SetScore(0);
-			lpScoreMng.SetFeverCnt(0);
-			lpScoreMng.SetFever(false);
-			auto fade = TransitionFade::create(fadeTime, scene);
-			Director::getInstance()->replaceScene(fade);
+			gameEnd();
 		}
+		resultTime++;
 	}
 	else
 	{
@@ -399,6 +391,22 @@ void GameMain::darkScreen()
 		BWLayer->getChildByName("fade")->setOpacity(120);
 		pauseFlag = true;
 	}
+}
+
+void GameMain::gameEnd()
+{
+	endSchedule();
+
+	auto fadeTime = 2.0f;
+	lpAudioManager.ResetAudio();
+	lpAudioManager.SetSound("click");
+	auto scene = TitleScene::createScene();
+
+	lpScoreMng.SetScore(0);
+	lpScoreMng.SetFeverCnt(0);
+	lpScoreMng.SetFever(false);
+	auto fade = TransitionFade::create(fadeTime, scene);
+	Director::getInstance()->replaceScene(fade);
 }
 
 void GameMain::menuCloseCallback(Ref* pSender)

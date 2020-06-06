@@ -4,7 +4,6 @@
 
 //#pragma execution_character_set("utf-8")
 
-
 USING_NS_CC;
 
 cocos2d::Scene * TitleScene::createScene()
@@ -199,18 +198,6 @@ void TitleScene::update(float d)
 				}
 			}
 		}
-		//else if (TitleFadeCnt == fadeTime)
-		//{
-		//	lpAudioManager.SetSound("click");
-		//	auto scene = GameScene::createScene();
-
-		//	// sceneの生成
-		//	Director::getInstance()->replaceScene(scene);
-		//}
-		//else
-		//{
-		//	TitleFadeCnt += 0.1f;
-		//}
 
 		for (auto itrKey : UseKey())
 		{
@@ -221,14 +208,80 @@ void TitleScene::update(float d)
 
 void TitleScene::SetCredit()
 {
+	//	間の補正用
+	int cor = 10;
+#if CK_PLATFORM_ANDROID
+	SetCrText("お借りした素材等", 60, cor, T_Center);
+	cor += 50;
+	SetCrText("Cricket Audio", 30, cor, T_L);
+	SetCrText("www.crickettechnology.com", 20, cor, T_L);
+	SetCrText("Effekseer", 30, cor, T_L);
+	SetCrText("https://effekseer.github.io/jp/", 20, cor, T_L);
+	SetCrText("itch.io", 30, cor, T_L);
+	SetCrText("https://itch.io/game-assets/free", 20, cor, T_L);
+	SetCrText("KENNEY", 30, cor, T_L);
+	SetCrText("https://www.kenney.nl/assets/shooting-gallery", 20, cor, T_L);
+	SetCrText("晴耕雨読記", 30, cor, T_L);
+	SetCrText("http://10grove.moo.jp/blog/post-840/", 20, cor, T_L);
+
+	cor = 100;
+
+	SetCrText("ゆるドラシル RPGツクール素材提供サイト", 30, cor, T_R);
+	SetCrText("http://yurudora.com/tkool/", 20, cor, T_R);
+	SetCrText("小樽総合デザイン事務局", 30, cor, T_R);
+	SetCrText("https://otarunet.com/it/webdesign/comic-material-effect01/", 20, cor, T_R);
+	SetCrText("魔王魂", 30, cor, T_R);
+	SetCrText("https://maoudamashii.jokersounds.com/", 20, cor, T_R);
+	SetCrText("効果音ラボ", 30, cor, T_R);
+	SetCrText("https://soundeffect-lab.info/", 20, cor, T_R);
+	SetCrText("まるもじフォント(二コモジ)配布所", 30, cor, T_R);
+	SetCrText("http://nicofont.pupu.jp/nicomoji-plus.html", 20, cor, T_R);
+#else
+	SetCrText(u8"お借りした素材等", 60, cor, T_Center);
+	cor += 50;
+	SetCrText("Cricket Audio", 30, cor, T_L);
+	SetCrText("www.crickettechnology.com", 20, cor, T_L);
+	SetCrText("Effekseer", 30, cor, T_L);
+	SetCrText("https://effekseer.github.io/jp/", 20, cor, T_L);
+	SetCrText("itch.io", 30, cor, T_L);
+	SetCrText("https://itch.io/game-assets/free", 20, cor, T_L);
+	SetCrText("KENNEY", 30, cor, T_L);
+	SetCrText("https://www.kenney.nl/assets/shooting-gallery", 20, cor, T_L);
+	SetCrText(u8"晴耕雨読記", 30, cor, T_L);
+	SetCrText("http://10grove.moo.jp/blog/post-840/", 20, cor, T_L);
+
+	cor = 100;
+
+	SetCrText(u8"ゆるドラシル RPGツクール素材提供サイト", 30, cor, T_R);
+	SetCrText("http://yurudora.com/tkool/", 20, cor, T_R);
+	SetCrText(u8"小樽総合デザイン事務局", 30, cor, T_R);
+	SetCrText("https://otarunet.com/it/webdesign/comic-material-effect01/", 20, cor, T_R);
+	SetCrText(u8"魔王魂", 30, cor, T_R);
+	SetCrText("https://maoudamashii.jokersounds.com/", 20, cor, T_R);
+	SetCrText(u8"効果音ラボ", 30, cor, T_R);
+	SetCrText("https://soundeffect-lab.info/", 20, cor, T_R);
+	SetCrText(u8"まるもじフォント(二コモジ)配布所", 30, cor, T_R);
+	SetCrText("http://nicofont.pupu.jp/nicomoji-plus.html", 20, cor, T_R);
+#endif
 }
 
-void TitleScene::SetCrText(std::string str, int size, int &cor)
+void TitleScene::SetCrText(std::string str, int size, int &cor, TextDIR dir)
 {
-	cor += 30;
+	cor += 40;
 	auto scSize = cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
 	CCLabelTTF *text = CCLabelTTF::create(str, "Arial", size);
-	text->setPosition(scSize.width / 2, scSize.height - cor);
+
+	auto textPos = cocos2d::Vec2(scSize.width / 2, scSize.height - cor);
+	if (dir == TextDIR::T_L)
+	{
+		textPos = cocos2d::Vec2(scSize.width / 4, scSize.height - cor);
+	}
+	else if (dir == TextDIR::T_R)
+	{
+		textPos = cocos2d::Vec2(scSize.width - scSize.width / 3.5, scSize.height - cor);
+	}
+
+	text->setPosition(textPos);
 	creditLayer->addChild(text);
 }
 

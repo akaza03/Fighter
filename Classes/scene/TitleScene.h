@@ -6,6 +6,14 @@
 //	システム用キー(now,old)
 using systemKey = std::map <UseKey, std::pair<bool, bool>>;
 
+enum TextDIR
+{
+	T_Center,
+	T_L,
+	T_R,
+	T_MAX
+};
+
 class TitleScene : public cocos2d::Scene
 {
 public:
@@ -19,7 +27,7 @@ public:
 private:
 	void update(float d);
 	void SetCredit();
-	void SetCrText(std::string str, int size, int &cor);
+	void SetCrText(std::string str, int size, int &cor, TextDIR dir);
 
 	void SetUI();
 

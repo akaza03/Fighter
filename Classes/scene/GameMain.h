@@ -89,10 +89,14 @@ private:
 	void pause(cocos2d::Layer* layer);	//	ポーズ
 	void darkScreen();					//	ポーズ時の画面の暗転処理
 
+	void gameEnd();						//	ゲームを終了し、タイトルに戻る処理
+
 	cocos2d::Size confScSize;			//	設定上の画面サイズ
 	cocos2d::Size scSize;				//	実際の画面サイズ
 
 	float timeCount;					//	残り時間
+
+	float resultTime;					//	リザルト用時間計測
 
 	bool pauseFlag;
 	bool gameEndFlag;

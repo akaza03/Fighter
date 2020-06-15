@@ -41,8 +41,8 @@ enum LayerNumber
 	PL,						//	プレイヤー&攻撃用レイヤー
 	EM,						//	エネミー&攻撃用レイヤー
 	AT,
-	UI,						//	UI用レイヤー
 	BW,						//	画面を暗くするレイヤー(ポーズ画面など)
+	UI,						//	UI用レイヤー
 	FG,						//	フロントグラウンド用レイヤー
 	DB,						//	デバッグ用レイヤー
 	LAYER_MAX
@@ -62,8 +62,8 @@ private:
 	cocos2d::Layer * BGLayer;			//	バックグラウンド用レイヤー
 	cocos2d::Layer * PLLayer;			//	プレイヤー用レイヤー
 	cocos2d::Layer * EMLayer;			//	エネミー用レイヤー
-	cocos2d::Layer * UILayer;			//	UI用レイヤー
 	cocos2d::Layer * BWLayer;			//	画面を暗くするレイヤー(ポーズ画面など)
+	cocos2d::Layer * UILayer;			//	UI用レイヤー
 	cocos2d::Layer * FGLayer;			//	フロントグラウンド用レイヤー
 	cocos2d::Layer * DBLayer;			//	デバッグ用レイヤー
 

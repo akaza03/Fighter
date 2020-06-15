@@ -181,6 +181,11 @@ void GameMain::SetUI()
 	feImage->setOpacity(0);
 	UILayer->addChild(feImage, 1, "fLine");
 
+	//	ƒŠƒUƒ‹ƒg‰æ‘œ
+	feImage = Sprite::create(RES_ID("GameClear"));
+	feImage->setPosition(confScSize.width / 2, confScSize.height / 2);
+	feImage->setOpacity(0);
+	UILayer->addChild(feImage, 1, "GameClear");
 
 	//	ŽžŠÔ—p‰æ‘œ
 	time = Number::create();
@@ -333,6 +338,9 @@ void GameMain::screenUpdate()
 
 			lpAudioManager.StopSound("mainBGM.cks");
 			lpAudioManager.SetSound("gameEnd");
+			lpAudioManager.SetSound("resultBGM.cks");
+
+			UILayer->getChildByName("GameClear")->setOpacity(255);
 
 			gameEndFlag = true;
 		}

@@ -28,7 +28,7 @@ void AudioManager::AudioListInit()
 	//	‚Ü‚¸‚±‚±‚Å‰¹‚ð“o˜^
 	SetStream("titleBGM.cks", SoundType::S_BGM);
 	SetStream("mainBGM.cks", SoundType::S_BGM);
-	SetStream("clearBGM.cks", SoundType::S_BGM);
+	SetStream("resultBGM.cks", SoundType::S_BGM);
 	SetBank("Sound.ckb", "click", SoundType::S_SE);
 	SetBank("Sound.ckb", "blow", SoundType::S_SE);
 	SetBank("Sound.ckb", "attack", SoundType::S_SE);

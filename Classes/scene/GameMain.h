@@ -1,27 +1,3 @@
-/****************************************************************************
- Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
- 
- http://www.cocos2d-x.org
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- ****************************************************************************/
-
 #ifndef __HELLOWORLD_SCENE_H__
 #define __HELLOWORLD_SCENE_H__
 
@@ -40,7 +16,6 @@ enum LayerNumber
 	BG,						//	バックグラウンド用レイヤー
 	PL,						//	プレイヤー&攻撃用レイヤー
 	EM,						//	エネミー&攻撃用レイヤー
-	AT,
 	BW,						//	画面を暗くするレイヤー(ポーズ画面など)
 	UI,						//	UI用レイヤー
 	FG,						//	フロントグラウンド用レイヤー
@@ -59,24 +34,26 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
 
 private:
-	cocos2d::Layer * BGLayer;			//	バックグラウンド用レイヤー
-	cocos2d::Layer * PLLayer;			//	プレイヤー用レイヤー
-	cocos2d::Layer * EMLayer;			//	エネミー用レイヤー
-	cocos2d::Layer * BWLayer;			//	画面を暗くするレイヤー(ポーズ画面など)
-	cocos2d::Layer * UILayer;			//	UI用レイヤー
-	cocos2d::Layer * FGLayer;			//	フロントグラウンド用レイヤー
-	cocos2d::Layer * DBLayer;			//	デバッグ用レイヤー
+	cocos2d::Layer * BGLayer;								//	バックグラウンド用レイヤー
+	cocos2d::Layer * PLLayer;								//	プレイヤー用レイヤー
+	cocos2d::Layer * EMLayer;								//	エネミー用レイヤー
+	cocos2d::Layer * BWLayer;								//	画面を暗くするレイヤー(ポーズ画面など)
+	cocos2d::Layer * UILayer;								//	UI用レイヤー
+	cocos2d::Layer * FGLayer;								//	フロントグラウンド用レイヤー
+	cocos2d::Layer * DBLayer;								//	デバッグ用レイヤー
 
 	cocos2d::Camera* _camera;
 
-	OprtState *_oprtState;				//	システム用の操作制御
+	OprtState *_oprtState;									//	システム用の操作制御
 	sysKey key;
 
-	Number* time;						//	時間用
+	Number* time;											//	時間用
 
 	void update(float d);
 
 	void SetUI();
+	//	画像の配置処理(登録名,座標,透明度)
+	void SetImage(cocos2d::Sprite* sp, const char* name, cocos2d::Vec2 pos, int op);
 
 	void cameraUpdate();
 	void keyUpdate();
@@ -86,23 +63,23 @@ private:
 	void endSchedule();
 
 	void screenUpdate();
-	void pause(cocos2d::Layer* layer);	//	ポーズ
-	void darkScreen();					//	ポーズ時の画面の暗転処理
+	void pause(cocos2d::Layer* layer);						//	ポーズ
+	void darkScreen();										//	ポーズ時の画面の暗転処理
 
-	void gameEnd();						//	ゲームを終了し、タイトルに戻る処理
+	void gameEnd();											//	ゲームを終了し、タイトルに戻る処理
 
-	cocos2d::Size confScSize;			//	設定上の画面サイズ
-	cocos2d::Size scSize;				//	実際の画面サイズ
+	cocos2d::Size confScSize;								//	設定上の画面サイズ
+	cocos2d::Size scSize;									//	実際の画面サイズ
 
-	float timeCount;					//	残り時間
+	float timeCount;										//	残り時間
 
-	float resultTime;					//	リザルト用時間計測
+	float resultTime;										//	リザルト用時間計測
 
 	bool pauseFlag;
 	bool gameEndFlag;
 	
-	bool shakeLR;						//	画面を揺らす際の左右フラグ
-	int shakeTime;						//	画面を揺らす際の時間計測用
+	bool shakeLR;											//	画面を揺らす際の左右フラグ
+	int shakeTime;											//	画面を揺らす際の時間計測用
     
     // implement the "static create()" method manually
     CREATE_FUNC(GameMain);

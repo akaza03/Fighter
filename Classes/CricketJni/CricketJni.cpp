@@ -6,7 +6,6 @@ extern "C" JNIEXPORT void JNICALL Java_org_cocos2dx_cpp_AppActivity_initCricket(
 {
 #if CK_PLATFORM_ANDROID
 	CkConfig config(env, thiz);
-	//auto config = _CkConfig(env, thiz);
 	CkInit(&config);
 #endif
 }

@@ -1,27 +1,3 @@
-/****************************************************************************
- Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
- 
- http://www.cocos2d-x.org
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- ****************************************************************************/
-
 #include "GameMain.h"
 #include "TitleScene.h"
 #include "map/MapMaker.h"
@@ -127,7 +103,10 @@ void GameMain::update(float d)
 	//	Audioの更新
 	lpAudioManager.update();
 	//	スコアの更新
-	lpScoreMng.update();
+	if (!gameEndFlag)
+	{
+		lpScoreMng.update();
+	}
 	//	キーの更新
 	keyUpdate();
 	//	cameraの更新
@@ -158,43 +137,44 @@ void GameMain::SetUI()
 
 	//	フィーバー用画像
 	auto feImage = Sprite::create(RES_ID("feverBase"));
-	feImage->setPosition(feImage->getContentSize().width, feImage->getContentSize().height);
-	feImage->setOpacity(150);
-	UILayer->addChild(feImage, 1, "feverBase");
+	SetImage(feImage, "feverBase", Vec2(feImage->getContentSize().width, feImage->getContentSize().height), 150);
 
 	feImage = Sprite::create(RES_ID("feverBar"));
-	feImage->setPosition(feImage->getContentSize().width, feImage->getContentSize().height);
-	feImage->setOpacity(200);
-	UILayer->addChild(feImage, 1, "feverBar");
+	SetImage(feImage, "feverBar", Vec2(feImage->getContentSize().width, feImage->getContentSize().height), 200);
 
 	feImage = Sprite::create(RES_ID("feverFront"));
-	feImage->setPosition(feImage->getContentSize().width, feImage->getContentSize().height);
-	UILayer->addChild(feImage, 1, "feverFront");
+	SetImage(feImage, "feverFront", Vec2(feImage->getContentSize().width, feImage->getContentSize().height), 255);
 
 	feImage = Sprite::create(RES_ID("fever"));
-	feImage->setPosition(feImage->getContentSize().width, feImage->getContentSize().height * 4);
-	feImage->setOpacity(0);
-	UILayer->addChild(feImage, 1, "fever");
+	SetImage(feImage, "fever", Vec2(feImage->getContentSize().width, feImage->getContentSize().height * 4), 0);
 
 	feImage = Sprite::create(RES_ID("fLine"));
-	feImage->setPosition(confScSize.width / 2, confScSize.height / 2);
-	feImage->setOpacity(0);
-	UILayer->addChild(feImage, 1, "fLine");
+	SetImage(feImage, "fLine", Vec2(confScSize.width / 2, confScSize.height / 2), 0);
 
 	//	リザルト画像
 	feImage = Sprite::create(RES_ID("GameClear"));
-	feImage->setPosition(confScSize.width / 2, confScSize.height / 2);
-	feImage->setOpacity(0);
-	UILayer->addChild(feImage, 1, "GameClear");
+	SetImage(feImage, "GameClear", Vec2(confScSize.width / 2, confScSize.height - feImage->getContentSize().height), 0);
 
 	//	時間用画像
 	time = Number::create();
-	time->setPosition(confScSize.width / 2, confScSize.height - 40);
+	time->setPosition(confScSize.width / 2 + 50, confScSize.height - 40);
 	time->setSpan(40);
 	time->setPrefix("number");
 	UILayer->addChild(time, 1, "timeCounter");
 	timeCount = 200 * 10 + 10;
+
+	//	残り時間の文字
+	feImage = Sprite::create(RES_ID("Remain"));
+	SetImage(feImage, "Remain", Vec2(confScSize.width / 2 - 100, confScSize.height - 40), 255);
+
 	timeUpdate();
+}
+
+void GameMain::SetImage(cocos2d::Sprite* sp, const char* name, cocos2d::Vec2 pos, int op)
+{
+	sp->setPosition(pos);
+	sp->setOpacity(op);
+	UILayer->addChild(sp, 1, name);
 }
 
 void GameMain::cameraUpdate()
@@ -322,7 +302,6 @@ void GameMain::screenUpdate()
 		{
 			//	プレイヤーとエネミーにゲーム終了の合図を送る
 			player->SetGameEnd(true);
-
 			auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
 			auto layer = nowScene->getChildByName("EMLayer");
 			for (auto obj : layer->getChildren())
@@ -331,16 +310,31 @@ void GameMain::screenUpdate()
 				chara->SetGameEnd(true);
 			}
 
+			//	一部レイヤーを止める
 			pause(BGLayer);
 			pause(FGLayer);
 			pause(UILayer);
 			darkScreen();
 
+			//	メイン用BGMを止めてリザルト用BGMを流す
 			lpAudioManager.StopSound("mainBGM.cks");
 			lpAudioManager.SetSound("gameEnd");
 			lpAudioManager.SetSound("resultBGM.cks");
 
+			//	リザルト用画像表示
 			UILayer->getChildByName("GameClear")->setOpacity(255);
+
+			//	画像非表示
+			UILayer->removeChildByName("timeCounter");
+			UILayer->removeChildByName("feverBase");
+			UILayer->removeChildByName("feverBar");
+			UILayer->removeChildByName("feverFront");
+			UILayer->removeChildByName("fever");
+			UILayer->removeChildByName("fLine");
+			UILayer->removeChildByName("Remain");
+
+			//	スコアの表示
+			lpScoreMng.ResultScore();
 
 			gameEndFlag = true;
 		}

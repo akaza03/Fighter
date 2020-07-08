@@ -47,11 +47,12 @@ void ResourceManager::LoadInit()
 	SetID("changeEff", "effect/Laser01.efk");
 	SetID("hitEff", "effect/hit.efk");
 	SetID("deathEff", "effect/death.efk");
-
 	//	フィーバー用バー
 	SetID("feverBase", "image/UI/BarBase.png");
 	SetID("feverBar", "image/UI/Bar.png");
 	SetID("feverFront", "image/UI/BarFront.png");
 	SetID("fever", "image/UI/fever.png");
 	SetID("fLine", "image/UI/line.png");
+	//	残り時間
+	SetID("Remain", "image/UI/remaining.png");
 }

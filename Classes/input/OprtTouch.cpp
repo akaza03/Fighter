@@ -15,9 +15,6 @@ cocos2d::EventListener * OprtTouch::oprtInit()
 	//	シングルタッチ
 	auto listener = cocos2d::EventListenerTouchOneByOne::create();
 
-	//	マルチタッチ
-	//auto listener = cocos2d::EventListenerTouchAllAtOnce::create();
-
 	listener->onTouchBegan = [this](cocos2d::Touch* touch, cocos2d::Event* event)->bool
 	{
 		_startTouchPos = touch->getLocation();
@@ -33,8 +30,6 @@ cocos2d::EventListener * OprtTouch::oprtInit()
 		StartSP->setScale(2);
 		nowScene->addChild(StartSP,0,"touchIcon");
 
-		//lpEffectManager.SetEffect((RES_ID("changeEff").c_str()), "UILayer", false, _startTouchPos, 20, true);
-
 		return true;
 	};
 
@@ -49,6 +44,8 @@ cocos2d::EventListener * OprtTouch::oprtInit()
 	listener->onTouchEnded = [this](cocos2d::Touch* touch, cocos2d::Event* event)->bool
 	{
 		firstTouchFlag = false;
+
+		//	タッチ開始位置の目印を削除
 		auto nowScene = cocos2d::Director::getInstance()->getRunningScene();
 		nowScene->removeChildByName("touchIcon");
 

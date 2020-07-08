@@ -27,8 +27,11 @@ public:
 
 	void PlusScore(int number);
 
+	void ResultScore();							//	リザルト時のスコアの画面中央表示
+
 	//	フィーバー関連
 	float GetFeverCnt();
+
 	void SetFeverCnt(float number);
 
 	void PlusFeverCnt(float number);

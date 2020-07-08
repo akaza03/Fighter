@@ -15,7 +15,7 @@ void ScoreManager::InitNumber()
 {
 	auto confScSize = cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
 
-	//	制限時間のセット
+	//	スコアのセット
 	number = Number::create();
 	number->setPosition(confScSize.width - 60, confScSize.height - 40);
 	number->setSpan(40);
@@ -40,6 +40,13 @@ void ScoreManager::SetScore(int number)
 void ScoreManager::PlusScore(int number)
 {
 	score += number;
+}
+
+void ScoreManager::ResultScore()
+{
+	auto confScSize = cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
+	number->setPosition(confScSize.width / 2, confScSize.height / 2);
+	number->setScale(2);
 }
 
 float ScoreManager::GetFeverCnt()

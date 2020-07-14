@@ -35,6 +35,7 @@ void ResourceManager::LoadInit()
 	SetID("logo", "image/logo.png");
 	SetID("GameStart", "image/UI/GameStart.png");
 	SetID("GameClear", "image/UI/GameClear.png");
+	SetID("start", "image/UI/start.png");
 	SetID("credit", "image/UI/credit.png");
 	//	ƒ†ƒjƒbƒg‰æ‘œ
 	SetID("p0unit", "image/player/00-unit.png");

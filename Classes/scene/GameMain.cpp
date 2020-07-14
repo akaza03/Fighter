@@ -38,6 +38,7 @@ bool GameMain::init()
 	lpScoreMng.SetFever(false);
 	gameEndFlag = false;
 	resultTime = 0;
+	startFlag = false;
 
 	BGLayer = Layer::create();
 	this->addChild(BGLayer, LayerNumber::BG, "BGLayer");
@@ -93,31 +94,80 @@ bool GameMain::init()
 	}
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(_oprtState->oprtInit(), this);
 
-	this->scheduleOnce(schedule_selector(GameMain::startSchedule), 2.1f);
+	//	開始時のカウントの時間
+	timeCount = 4 * 50;
+
+	this->scheduleOnce(schedule_selector(GameMain::startCounter), 2.1f);
 
     return true;
 }
 
 void GameMain::update(float d)
 {
-	//	Audioの更新
-	lpAudioManager.update();
 	//	スコアの更新
 	if (!gameEndFlag)
 	{
 		lpScoreMng.update();
 	}
+	//	Audioの更新
+	lpAudioManager.update();
 	//	キーの更新
 	keyUpdate();
-	//	cameraの更新
-	cameraUpdate();
 	//	エフェクトの更新
 	lpEffectManager.update(_camera);
-	//	制限時間の更新
-	timeUpdate();
-	//	ゲームクリア判断
-	screenUpdate();
 
+	//	ゲームスタート時のカウント処理
+	if (!startFlag)
+	{
+		startNumber->setNumber(timeCount / 50);
+
+		timeCount--;
+		//	カウントが0になる瞬間にstart画像を表示する
+		if (timeCount / 50 == 1 && timeCount % 50 == 0)
+		{
+			//	カウント画像を透明に
+			startNumber->setOpacity(0);
+
+			//	start画像の表示
+			auto feImage = Sprite::create(RES_ID("start"));
+			SetImage(feImage, "start", Vec2(confScSize.width / 2, confScSize.height / 2), 255);
+		}
+		//	カウントが0になった時のゲーム開始処理
+		else if (timeCount <= 0)
+		{
+			//	カウント画像の削除
+			startNumber->remove();
+
+			//	時間用画像
+			time = Number::create();
+			time->setPosition(confScSize.width / 2 + 50, confScSize.height - 40);
+			time->setSpan(40);
+			time->setPrefix("number");
+			UILayer->addChild(time, 1, "timeCounter");
+
+			UILayer->getChildByName("start")->setOpacity(0);
+
+			//	残り時間
+			timeCount = 200 * 10 + 10;
+
+			//	残り時間の文字
+			auto feImage = Sprite::create(RES_ID("Remain"));
+			SetImage(feImage, "Remain", Vec2(confScSize.width / 2 - 100, confScSize.height - 40), 255);
+
+			this->scheduleOnce(schedule_selector(GameMain::startSchedule), 0);
+			startFlag = true;
+		}
+	}
+	//	通常update
+	else
+	{
+		//	cameraの更新
+		cameraUpdate();
+		//	制限時間の更新
+		timeUpdate();
+		//	ゲームクリア判断
+		screenUpdate();
+	}
 	//	keyOldの更新
 	for (auto itrKey : UseKey())
 	{
@@ -154,20 +204,6 @@ void GameMain::SetUI()
 	//	リザルト画像
 	feImage = Sprite::create(RES_ID("GameClear"));
 	SetImage(feImage, "GameClear", Vec2(confScSize.width / 2, confScSize.height - feImage->getContentSize().height), 0);
-
-	//	時間用画像
-	time = Number::create();
-	time->setPosition(confScSize.width / 2 + 50, confScSize.height - 40);
-	time->setSpan(40);
-	time->setPrefix("number");
-	UILayer->addChild(time, 1, "timeCounter");
-	timeCount = 200 * 10 + 10;
-
-	//	残り時間の文字
-	feImage = Sprite::create(RES_ID("Remain"));
-	SetImage(feImage, "Remain", Vec2(confScSize.width / 2 - 100, confScSize.height - 40), 255);
-
-	timeUpdate();
 }
 
 void GameMain::SetImage(cocos2d::Sprite* sp, const char* name, cocos2d::Vec2 pos, int op)
@@ -258,10 +294,21 @@ void GameMain::timeUpdate()
 	}
 }
 
+void GameMain::startCounter(float d)
+{
+	startNumber = Number::create();
+	startNumber->setPosition(confScSize.width / 2, confScSize.height / 2);
+	startNumber->setSpan(40);
+	startNumber->setPrefix("number");
+	startNumber->setScale(2);
+
+	UILayer->addChild(startNumber, 1, "startCount");
+
+	this->scheduleUpdate();
+}
+
 void GameMain::startSchedule(float d)
 {
-	this->scheduleUpdate();
-
 	//	プレイヤーのスケジュールセット
 	Character* player = (Character*)PLLayer->getChildByName("player");
 	player->scheduleUpdate();

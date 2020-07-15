@@ -122,6 +122,18 @@ void GameMain::update(float d)
 		startNumber->setNumber(timeCount / 50);
 
 		timeCount--;
+		if (timeCount % 50 == 49)
+		{
+			if (timeCount / 50 == 0)
+			{
+				lpAudioManager.SetSound("gameStart");
+			}
+			else
+			{
+				lpAudioManager.SetSound("count");
+			}
+		}
+
 		//	カウントが0になる瞬間にstart画像を表示する
 		if (timeCount / 50 == 1 && timeCount % 50 == 0)
 		{

@@ -30,10 +30,12 @@ void AudioManager::AudioListInit()
 	SetStream("mainBGM.cks", SoundType::S_BGM);
 	SetStream("resultBGM.cks", SoundType::S_BGM);
 	SetBank("Sound.ckb", "click", SoundType::S_SE);
+	SetBank("Sound.ckb", "count", SoundType::S_SE);
 	SetBank("Sound.ckb", "blow", SoundType::S_SE);
 	SetBank("Sound.ckb", "attack", SoundType::S_SE);
 	SetBank("Sound.ckb", "fever", SoundType::S_SE);
 	SetBank("Sound.ckb", "damage", SoundType::S_SE);
+	SetBank("Sound.ckb", "gameStart", SoundType::S_SE);
 	SetBank("Sound.ckb", "gameEnd", SoundType::S_SE);
 }
 

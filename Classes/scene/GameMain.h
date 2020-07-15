@@ -74,7 +74,7 @@ private:
 	cocos2d::Size confScSize;				//	設定上の画面サイズ
 	cocos2d::Size scSize;					//	実際の画面サイズ
 
-	int timeCount;						//	残り時間
+	int timeCount;							//	残り時間
 
 	float resultTime;						//	リザルト用時間計測
 

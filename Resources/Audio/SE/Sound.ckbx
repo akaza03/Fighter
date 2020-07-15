@@ -3,7 +3,9 @@
     <sound name="attack" source="attack.wav" />
     <sound name="blow" source="blow.wav" />
     <sound name="click" source="click.wav" />
+    <sound name="count" source="count.wav" />
     <sound name="fever" source="fever.wav" />
+    <sound name="gameStart" source="gameStart.wav" />
     <sound name="gameEnd" source="gameEnd.wav" />
     <sound name="damage" source="damage.wav" />
 </bank>

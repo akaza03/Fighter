@@ -45,7 +45,19 @@ void ScoreManager::PlusScore(int number)
 void ScoreManager::ResultScore()
 {
 	auto confScSize = cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
-	number->setPosition(confScSize.width / 2, confScSize.height / 2);
+	
+	auto num = score;
+	int digit = -1;
+	//	スコアの桁数を求める
+	while (num != 0)
+	{
+		num /= 10;
+		digit++;
+	}
+	//	桁数による補正用
+	int dis = 40;
+
+	number->setPosition(confScSize.width / 2 + dis * digit, confScSize.height / 2);
 	number->setScale(2);
 }
 

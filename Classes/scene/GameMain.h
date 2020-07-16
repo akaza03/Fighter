@@ -60,15 +60,16 @@ private:
 	void keyUpdate();
 	void timeUpdate();
 
-	void startCounter(float d);
+	void startCounter(float d);				//	ゲーム開始のカウントを始める処理
 
 	void startSchedule(float d);			//	開始時のカウント終了後に動き出すupdate処理
 	void endSchedule();						//	ゲーム終了時にそれぞれのupdateを止める処理
 
-	void screenUpdate();
+	void screenUpdate();					//	ゲーム終了時やポーズ時の画面処理
 	void pause(cocos2d::Layer* layer);		//	ポーズ
 	void darkScreen();						//	ポーズ時の画面の暗転処理
 
+	void ResultScene(float d);				//	リザルト処理
 	void gameEnd();							//	ゲームを終了し、タイトルに戻る処理
 
 	cocos2d::Size confScSize;				//	設定上の画面サイズ
@@ -80,7 +81,6 @@ private:
 
 	Number *startNumber;					//	スタート時のカウント用
 	bool startFlag;							//	スタート時のカウント終了フラグ
-
 
 	bool pauseFlag;
 	bool gameEndFlag;

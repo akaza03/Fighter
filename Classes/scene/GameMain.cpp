@@ -40,6 +40,7 @@ bool GameMain::init()
 	resultTime = 0;
 	startFlag = false;
 
+	//	レイヤーの作成
 	BGLayer = Layer::create();
 	this->addChild(BGLayer, LayerNumber::BG, "BGLayer");
 	PLLayer = Layer::create();
@@ -53,6 +54,7 @@ bool GameMain::init()
 	BWLayer = Layer::create();
 	this->addChild(BWLayer, LayerNumber::BW, "BWLayer");
 
+	//	マップの読み込み
 	lpMapMaker.SetMap("map.tmx", BGLayer, "stageMap");
 
 	SetUI();
@@ -175,8 +177,13 @@ void GameMain::update(float d)
 	{
 		//	cameraの更新
 		cameraUpdate();
-		//	制限時間の更新
-		timeUpdate();
+
+		if (!gameEndFlag)
+		{
+			//	制限時間の更新
+			timeUpdate();
+		}
+
 		//	ゲームクリア判断
 		screenUpdate();
 	}
@@ -354,7 +361,7 @@ void GameMain::endSchedule()
 void GameMain::screenUpdate()
 {
 	Character* player = (Character*)PLLayer->getChildByName("player");
-	//	ゲームクリアorゲームオーバー処理
+	//	ゲーム終了処理
 	if (player->GetAnim() == AnimState::DIE || timeCount / 10 <= 0)
 	{
 		if (!gameEndFlag)
@@ -373,15 +380,6 @@ void GameMain::screenUpdate()
 			pause(BGLayer);
 			pause(FGLayer);
 			pause(UILayer);
-			darkScreen();
-
-			//	メイン用BGMを止めてリザルト用BGMを流す
-			lpAudioManager.StopSound("mainBGM.cks");
-			lpAudioManager.SetSound("gameEnd");
-			lpAudioManager.SetSound("resultBGM.cks");
-
-			//	リザルト用画像表示
-			UILayer->getChildByName("GameClear")->setOpacity(255);
 
 			//	画像非表示
 			UILayer->removeChildByName("timeCounter");
@@ -392,18 +390,21 @@ void GameMain::screenUpdate()
 			UILayer->removeChildByName("fLine");
 			UILayer->removeChildByName("Remain");
 
-			//	スコアの表示
-			lpScoreMng.ResultScore();
+			lpAudioManager.SetSound("gameEnd");
+
+			this->scheduleOnce(schedule_selector(GameMain::ResultScene), 1.0f);
 
 			gameEndFlag = true;
 		}
-
-		//	タイトルに戻る処理
-		if (key[UseKey::K_ENTER].first && !key[UseKey::K_ENTER].second || (_oprtState->firstTouch() && resultTime > 100))
+		else
 		{
-			gameEnd();
+			//	タイトルに戻る処理
+			if (key[UseKey::K_ENTER].first && !key[UseKey::K_ENTER].second || (_oprtState->firstTouch() && resultTime > 100))
+			{
+				gameEnd();
+			}
+			resultTime++;
 		}
-		resultTime++;
 	}
 	else
 	{
@@ -452,6 +453,21 @@ void GameMain::darkScreen()
 		BWLayer->getChildByName("fade")->setOpacity(120);
 		pauseFlag = true;
 	}
+}
+
+void GameMain::ResultScene(float d)
+{
+	darkScreen();
+
+	//	メイン用BGMを止めてリザルト用BGMを流す
+	lpAudioManager.StopSound("mainBGM.cks");
+	lpAudioManager.SetSound("resultBGM.cks");
+
+	//	リザルト用画像表示
+	UILayer->getChildByName("GameClear")->setOpacity(255);
+
+	//	スコアの表示
+	lpScoreMng.ResultScore();
 }
 
 void GameMain::gameEnd()

@@ -37,7 +37,6 @@ cocos2d::EventListener * OprtTouch::oprtInit()
 	listener->onTouchMoved = [this](cocos2d::Touch* touch, cocos2d::Event* event)->bool
 	{
 		firstTouchFlag = false;
-		checkKey(touch->getLocation());
 		return true;
 	};
 
@@ -62,44 +61,3 @@ cocos2d::EventListener * OprtTouch::oprtInit()
 void OprtTouch::update()
 {
 }
-
-void OprtTouch::checkKey(cocos2d::Vec2 touchPos)
-{
-	auto offset = 50;
-	if (touchPos.x < _startTouchPos.x - offset)
-	{
-		_oprtKeyList[UseKey::K_LEFT] = true;
-	}
-	else
-	{
-		_oprtKeyList[UseKey::K_LEFT] = false;
-	}
-
-	if (touchPos.x > _startTouchPos.x + offset)
-	{
-		_oprtKeyList[UseKey::K_RIGHT] = true;
-	}
-	else
-	{
-		_oprtKeyList[UseKey::K_RIGHT] = false;
-	}
-
-	if (touchPos.y > _startTouchPos.y + offset)
-	{
-		_oprtKeyList[UseKey::K_UP] = true;
-	}
-	else
-	{
-		_oprtKeyList[UseKey::K_UP] = false;
-	}
-
-	if (touchPos.y < _startTouchPos.y - offset)
-	{
-		_oprtKeyList[UseKey::K_DOWN] = true;
-	}
-	else
-	{
-		_oprtKeyList[UseKey::K_DOWN] = false;
-	}
-}
-

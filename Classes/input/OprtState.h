@@ -16,7 +16,8 @@ public:
 	virtual void update() = 0;
 	OprtKeyList GetKeyList();
 	cocos2d::Vec2 GetTouchPoint();
-	bool firstTouch();					//	初回タッチか調べる
+	bool GetFirstTouch();				//	初回タッチか調べる
+	void SetFirstTouch(bool flag);		//	初回タッチのセット
 protected:
 	OprtKeyList _oprtKeyList;
 	cocos2d::Vec2 touchPoint;

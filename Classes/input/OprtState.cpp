@@ -25,7 +25,12 @@ cocos2d::Vec2 OprtState::GetTouchPoint()
 	return touchPoint;
 }
 
-bool OprtState::firstTouch()
+bool OprtState::GetFirstTouch()
 {
 	return firstTouchFlag;
+}
+
+void OprtState::SetFirstTouch(bool flag)
+{
+	firstTouchFlag = flag;
 }

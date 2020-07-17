@@ -11,8 +11,6 @@ public:
 	void update();
 
 private:
-	void checkKey(cocos2d::Vec2 touchPos);									//	キーの判定
-
-	cocos2d::Vec2 _startTouchPos;											//	タッチ開始時の座標
+	cocos2d::Vec2 _startTouchPos;					//	タッチ開始時の座標
 };
 

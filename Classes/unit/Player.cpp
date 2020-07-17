@@ -35,7 +35,7 @@ void Player::update(float d)
 			}
 
 			//	タッチ座標の取得
-			if (_oprtState->GetTouchPoint() != oldTouchPos)
+			if (_oprtState->GetFirstTouch())
 			{
 				itr.second.touchPos = _oprtState->GetTouchPoint();
 				oldTouchPos = itr.second.touchPos;
@@ -46,6 +46,7 @@ void Player::update(float d)
 			}
 
 			unitUpdate(itr.second);
+			_oprtState->SetFirstTouch(false);
 		}
 	}
 

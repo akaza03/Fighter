@@ -102,7 +102,7 @@ void TitleScene::update(float d)
 			}
 			else
 			{
-				if (_oprtState->firstTouch())
+				if (_oprtState->GetFirstTouch())
 				{
 					cocos2d::Rect spriteRect = cocos2d::Rect(startButton->getPosition().x - startButton->getContentSize().width / 2,
 						startButton->getPosition().y - startButton->getContentSize().height / 2,
@@ -144,7 +144,7 @@ void TitleScene::update(float d)
 		}
 		else
 		{
-			touchFlag = _oprtState->firstTouch();
+			touchFlag = _oprtState->GetFirstTouch();
 		}
 
 
@@ -160,7 +160,6 @@ void TitleScene::update(float d)
 
 				auto scene = GameMain::createScene();
 
-				//Director::getInstance()->replaceScene(scene);
 				GameMoveFlag = true;
 
 				auto fade = TransitionFade::create(fadeTime, scene);

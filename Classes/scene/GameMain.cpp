@@ -220,6 +220,9 @@ void GameMain::SetUI()
 	feImage = Sprite::create(RES_ID("fLine"));
 	SetImage(feImage, "fLine", Vec2(confScSize.width / 2, confScSize.height / 2), 0);
 
+	//	タイムアップ用画像
+	feImage = Sprite::create(RES_ID("timeUp"));
+	SetImage(feImage, "timeUp", Vec2(confScSize.width / 2, confScSize.height / 2), 0);
 	//	リザルト画像
 	feImage = Sprite::create(RES_ID("GameClear"));
 	SetImage(feImage, "GameClear", Vec2(confScSize.width / 2, confScSize.height - feImage->getContentSize().height), 0);
@@ -390,6 +393,8 @@ void GameMain::screenUpdate()
 			UILayer->removeChildByName("fLine");
 			UILayer->removeChildByName("Remain");
 
+			UILayer->getChildByName("timeUp")->setOpacity(255);
+
 			lpAudioManager.SetSound("gameEnd");
 
 			this->scheduleOnce(schedule_selector(GameMain::ResultScene), 1.0f);
@@ -399,7 +404,7 @@ void GameMain::screenUpdate()
 		else
 		{
 			//	タイトルに戻る処理
-			if (key[UseKey::K_ENTER].first && !key[UseKey::K_ENTER].second || (_oprtState->firstTouch() && resultTime > 100))
+			if (key[UseKey::K_ENTER].first && !key[UseKey::K_ENTER].second || (_oprtState->GetFirstTouch() && resultTime > 100))
 			{
 				gameEnd();
 			}
@@ -465,6 +470,8 @@ void GameMain::ResultScene(float d)
 
 	//	リザルト用画像表示
 	UILayer->getChildByName("GameClear")->setOpacity(255);
+
+	UILayer->getChildByName("timeUp")->setOpacity(0);
 
 	//	スコアの表示
 	lpScoreMng.ResultScore();

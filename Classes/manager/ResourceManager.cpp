@@ -34,8 +34,6 @@ void ResourceManager::LoadInit()
 	//	タイトル画像
 	SetID("logo", "image/logo.png");
 	SetID("GameStart", "image/UI/GameStart.png");
-	SetID("GameClear", "image/UI/GameClear.png");
-	SetID("start", "image/UI/start.png");
 	SetID("credit", "image/UI/credit.png");
 	//	ユニット画像
 	SetID("p0unit", "image/player/00-unit.png");
@@ -56,4 +54,8 @@ void ResourceManager::LoadInit()
 	SetID("fLine", "image/UI/line.png");
 	//	残り時間
 	SetID("Remain", "image/UI/remaining.png");
+	//	ゲーム中画像
+	SetID("start", "image/UI/start.png");
+	SetID("timeUp", "image/UI/timeUp.png");
+	SetID("GameClear", "image/UI/GameClear.png");
 }
